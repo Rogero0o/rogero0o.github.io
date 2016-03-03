@@ -4,7 +4,7 @@ title:      "《Android 开发艺术探索》 读书笔记"
 subtitle:   "要点记录"
 date: 2015-11-30T10:47:07+00:00
 author:     "Roger"
-header-img: "img/post-bg-2015.jpg"
+header-img: "img/android-bg8.jpg"
 tags:
     - 《Android 开发艺术探索》 读书笔记
 ---

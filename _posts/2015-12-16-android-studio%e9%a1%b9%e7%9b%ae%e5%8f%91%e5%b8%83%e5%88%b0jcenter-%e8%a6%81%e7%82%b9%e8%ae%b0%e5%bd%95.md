@@ -4,7 +4,7 @@ title:      "android studio项目发布到jcenter 要点记录"
 subtitle:   "要点记录"
 date: 2015-09-25T17:39:22+00:00
 author:     "Roger"
-header-img: "img/post-bg-2015.jpg"
+header-img: "img/android-bg3.jpg"
 tags:
     - android studio项目发布到jcenter
 ---

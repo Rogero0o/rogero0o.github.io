@@ -4,7 +4,7 @@ title:      "世界，你好！"
 subtitle:   "Hello World, Hello Blog"
 date: 2015-03-18T10:49:04+00:00
 author:     "Roger"
-header-img: "img/post-bg-2015.jpg"
+header-img: "img/start-bg.jpg"
 tags:
     - Life
 ---

@@ -4,7 +4,7 @@ title:      "本地编译android4.4.2 Settings环境搭建记录"
 subtitle:   "源码解析"
 date: 2015-04-16T16:22:56+00:00
 author:     "Roger"
-header-img: "img/post-bg-2015.jpg"
+header-img: "img/android-bg.jpg"
 tags:
     - Android Framework
 ---

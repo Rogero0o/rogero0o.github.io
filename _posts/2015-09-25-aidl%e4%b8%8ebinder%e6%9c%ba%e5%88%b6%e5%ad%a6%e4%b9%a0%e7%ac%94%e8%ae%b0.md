@@ -4,9 +4,9 @@ title:      "AIDL与Binder机制学习笔记"
 subtitle:   "源码解析"
 date: 2015-09-25T17:39:22+00:00
 author:     "Roger"
-header-img: "img/post-bg-2015.jpg"
+header-img: "img/android-bg6.jpg"
 tags:
-    - Android Framewrok
+    - Android Framework
 ---
 最近学习了Binder机制内容，研究了好多大牛的博客，不过惭愧许多都看得云里雾里，最后通过不懈努力死缠烂打终于摸到一些门道，特此记录一下。
 

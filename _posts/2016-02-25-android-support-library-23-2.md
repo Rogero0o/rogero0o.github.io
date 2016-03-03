@@ -4,7 +4,7 @@ title:      "Android Support Library 23.2"
 subtitle:   "翻译"
 date: 2016-02-25T12:00:19+00:00
 author:     "Roger"
-header-img: "img/post-bg-2015.jpg"
+header-img: "img/android-bg8.jpg"
 tags:
     - 翻译
 ---
