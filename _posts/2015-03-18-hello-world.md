@@ -1,17 +1,12 @@
 ---
-id: 1
-title: 世界，你好！
+layout:     post
+title:      "世界，你好！"
+subtitle:   "Hello World, Hello Blog"
 date: 2015-03-18T10:49:04+00:00
-author: roger
-layout: post
-duoshuo_thread_id:
-  - 1259801731408068609
-views:
-  - 31
-categories:
-  - 其他
-  - 所有文章
-  - 首页
+author:     "Roger"
+header-img: "img/post-bg-2015.jpg"
+tags:
+    - Life
 ---
   
 Hello World..

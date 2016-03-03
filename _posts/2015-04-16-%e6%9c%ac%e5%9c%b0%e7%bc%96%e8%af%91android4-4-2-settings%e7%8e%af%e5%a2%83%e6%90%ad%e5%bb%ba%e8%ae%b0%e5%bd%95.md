@@ -1,17 +1,12 @@
 ---
-id: 71
-title: 本地编译android4.4.2 Settings环境搭建记录
+layout:     post
+title:      "本地编译android4.4.2 Settings环境搭建记录"
+subtitle:   "源码解析"
 date: 2015-04-16T16:22:56+00:00
-author: roger
-layout: post
-views:
-  - 44
-duoshuo_thread_id:
-  - 1259801731408068617
-categories:
-  - 所有文章
-  - 技术
-  - 首页
+author:     "Roger"
+header-img: "img/post-bg-2015.jpg"
+tags:
+    - Android Framework
 ---
 最近在本地编译Settings环境的搭建上走了点弯路，现在记录一下，希望能帮到有需要的同学。
   
