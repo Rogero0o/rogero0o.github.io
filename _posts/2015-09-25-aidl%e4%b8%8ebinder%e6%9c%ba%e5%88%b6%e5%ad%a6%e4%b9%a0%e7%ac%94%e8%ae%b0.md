@@ -36,27 +36,31 @@ Binder驱动：该对象也为Binder类的实例，客户端通过该对象访�
 
 首先，客户端通过bindService绑定服务端，用来获取服务端的binder接口：
 
-<div class="codecolorer-container java twitlight" style="overflow:auto;white-space:nowrap;width:100%;height:100%;">
-  <div class="java codecolorer">
-    &nbsp; &nbsp; <span class="kw1">private</span> ICalcAIDL mCalcAidl<span class="sy0">;</span><br /> &nbsp; &nbsp; <span class="kw1">private</span> ServiceConnection mServiceConn <span class="sy0">=</span> <span class="kw1">new</span> ServiceConnection<span class="br0">&#40;</span><span class="br0">&#41;</span><br /> &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; @Override<br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">public</span> <span class="kw4">void</span> onServiceDisconnected<span class="br0">&#40;</span>ComponentName name<span class="br0">&#41;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Log.<span class="me1">e</span><span class="br0">&#40;</span><span class="st0">"client"</span>, <span class="st0">"onServiceDisconnected"</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mCalcAidl <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span><br /> <br /> &nbsp; &nbsp; &nbsp; &nbsp; @Override<br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">public</span> <span class="kw4">void</span> onServiceConnected<span class="br0">&#40;</span>ComponentName name, IBinder service<span class="br0">&#41;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Log.<span class="me1">e</span><span class="br0">&#40;</span><span class="st0">"client"</span>, <span class="st0">"onServiceConnected"</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mCalcAidl <span class="sy0">=</span> ICalcAIDL.<a href="http://www.google.com/search?hl=en&q=allinurl%3Astub+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Stub</span></a>.<span class="me1">asInterface</span><span class="br0">&#40;</span>service<span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span><br /> &nbsp; &nbsp; <span class="br0">&#125;</span><span class="sy0">;</span><br /> <span class="sy0"></</span>code <span class="sy0">></span><br /> 在 onServiceConnected 方法中调用了 ICalcAIDL.<a href="http://www.google.com/search?hl=en&q=allinurl%3Astub+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Stub</span></a>.<span class="me1">asInterface</span> 方法，并把一个IBinder的实例service传进去了，我们继续跟进，来到自动生成的ICalcAIDL.<span class="me1">java</span>类。<br /> <br /> <span class="sy0"><</span>code lang<span class="sy0">=</span><span class="st0">"java"</span><span class="sy0">></span><br /> <span class="kw1">public</span> <span class="kw1">static</span> com.<span class="me1">zhy</span>.<span class="me1">calc</span>.<span class="me1">aidl</span>.<span class="me1">ICalcAIDL</span> asInterface<span class="br0">&#40;</span>android.<span class="me1">os</span>.<span class="me1">IBinder</span> obj<span class="br0">&#41;</span><br /> <span class="br0">&#123;</span><br /> <span class="kw1">if</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>obj<span class="sy0">==</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><br /> <span class="kw1">return</span> <span class="kw2">null</span><span class="sy0">;</span><br /> <span class="br0">&#125;</span><br /> android.<span class="me1">os</span>.<span class="me1">IInterface</span> iin <span class="sy0">=</span> obj.<span class="me1">queryLocalInterface</span><span class="br0">&#40;</span>DESCRIPTOR<span class="br0">&#41;</span><span class="sy0">;</span><br /> <span class="kw1">if</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="br0">&#40;</span>iin<span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">&&</span><span class="br0">&#40;</span>iin <span class="kw1">instanceof</span> com.<span class="me1">zhy</span>.<span class="me1">calc</span>.<span class="me1">aidl</span>.<span class="me1">ICalcAIDL</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><br /> <span class="kw1">return</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>com.<span class="me1">zhy</span>.<span class="me1">calc</span>.<span class="me1">aidl</span>.<span class="me1">ICalcAIDL</span><span class="br0">&#41;</span>iin<span class="br0">&#41;</span><span class="sy0">;</span><br /> <span class="br0">&#125;</span><br /> <span class="kw1">return</span> <span class="kw1">new</span> com.<span class="me1">zhy</span>.<span class="me1">calc</span>.<span class="me1">aidl</span>.<span class="me1">ICalcAIDL</span>.<a href="http://www.google.com/search?hl=en&q=allinurl%3Astub+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Stub</span></a>.<a href="http://www.google.com/search?hl=en&q=allinurl%3Aproxy+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Proxy</span></a><span class="br0">&#40;</span>obj<span class="br0">&#41;</span><span class="sy0">;</span><br /> <span class="br0">&#125;</span>
-  </div>
-</div>
+	 private ICalcAIDL mCalcAidl;
+	    private ServiceConnection mServiceConn = new ServiceConnection()
+	    {
+	        @Override
+	        public void onServiceDisconnected(ComponentName name)
+	        {
+	            Log.e("client", "onServiceDisconnected");
+	            mCalcAidl = null;
+	        }
+	
+	        @Override
+	        public void onServiceConnected(ComponentName name, IBinder service)
+	        {
+	            Log.e("client", "onServiceConnected");
+	            mCalcAidl = ICalcAIDL.Stub.asInterface(service);
+	        }
+	    };
 
 这里的obj是一个BinderProxy对象，它的queryLocalInterface返回null，于是调用下面语句获得服务端的的远程接口：
 
-<div class="codecolorer-container java twitlight" style="overflow:auto;white-space:nowrap;width:100%;">
-  <div class="java codecolorer">
-    <span class="kw1">return</span> <span class="kw1">new</span> com.<span class="me1">zhy</span>.<span class="me1">calc</span>.<span class="me1">aidl</span>.<span class="me1">ICalcAIDL</span>.<a href="http://www.google.com/search?hl=en&q=allinurl%3Astub+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Stub</span></a>.<a href="http://www.google.com/search?hl=en&q=allinurl%3Aproxy+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Proxy</span></a><span class="br0">&#40;</span>obj<span class="br0">&#41;</span><span class="sy0">;</span>
-  </div>
-</div>
+	return new com.zhy.calc.aidl.ICalcAIDL.Stub.Proxy(obj);
 
 其实相当于调用了
 
-<div class="codecolorer-container java twitlight" style="overflow:auto;white-space:nowrap;width:100%;">
-  <div class="java codecolorer">
-    <span class="kw1">return</span> <span class="kw1">new</span> com.<span class="me1">zhy</span>.<span class="me1">calc</span>.<span class="me1">aidl</span>.<span class="me1">ICalcAIDL</span>.<a href="http://www.google.com/search?hl=en&q=allinurl%3Astub+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Stub</span></a>.<a href="http://www.google.com/search?hl=en&q=allinurl%3Aproxy+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Proxy</span></a><span class="br0">&#40;</span><span class="kw1">new</span> BinderProxy<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
-  </div>
-</div>
+	return new com.zhy.calc.aidl.ICalcAIDL.Stub.Proxy(new BinderProxy());
 
 由于具体过程涉及到底层native的实现，具体过程请参考<a href="http://blog.csdn.net/luoshengyang/article/details/6642463" title="Android系统进程间通信Binder机制在应用程序框架层的Java接口源代码分析" target="_blank">Android系统进程间通信Binder机制在应用程序框架层的Java接口源代码分析</a>中的
 
@@ -66,27 +70,54 @@ Binder驱动：该对象也为Binder类的实例，客户端通过该对象访�
 
 看到点击加法调用的代码：
 
-<div class="codecolorer-container java twitlight" style="overflow:auto;white-space:nowrap;width:100%;">
-  <div class="java codecolorer">
-    &nbsp; &nbsp; <span class="co3">/**<br /> &nbsp; &nbsp; &nbsp;* 点击12+12按钮时调用<br /> &nbsp; &nbsp; &nbsp;* @param view<br /> &nbsp; &nbsp; &nbsp;*/</span><br /> &nbsp; &nbsp; <span class="kw1">public</span> <span class="kw4">void</span> addInvoked<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&q=allinurl%3Aview+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">View</span></a> view<span class="br0">&#41;</span> <span class="kw1">throws</span> <a href="http://www.google.com/search?hl=en&q=allinurl%3Aexception+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Exception</span></a><br /> &nbsp; &nbsp; <span class="br0">&#123;</span><br /> <br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">if</span> <span class="br0">&#40;</span>mCalcAidl <span class="sy0">!=</span> <span class="kw2">null</span><span class="br0">&#41;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw4">int</span> addRes <span class="sy0">=</span> mCalcAidl.<span class="me1">add</span><span class="br0">&#40;</span><span class="nu0">12</span>, <span class="nu0">12</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Toast.<span class="me1">makeText</span><span class="br0">&#40;</span><span class="kw1">this</span>, addRes <span class="sy0">+</span> <span class="st0">""</span>, Toast.<span class="me1">LENGTH_SHORT</span><span class="br0">&#41;</span>.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span> <span class="kw1">else</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Toast.<span class="me1">makeText</span><span class="br0">&#40;</span><span class="kw1">this</span>, <span class="st0">"服务器被异常杀死，请重新绑定服务端"</span>, Toast.<span class="me1">LENGTH_SHORT</span><span class="br0">&#41;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> <br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span><br /> <br /> &nbsp; &nbsp; <span class="br0">&#125;</span>
-  </div>
-</div>
+	 /**
+	     * 点击12+12按钮时调用
+	     * @param view
+	     */
+	    public void addInvoked(View view) throws Exception
+	    {
+	
+	        if (mCalcAidl != null)
+	        {
+	            int addRes = mCalcAidl.add(12, 12);
+	            Toast.makeText(this, addRes + "", Toast.LENGTH_SHORT).show();
+	        } else
+	        {
+	            Toast.makeText(this, "服务器被异常杀死，请重新绑定服务端", Toast.LENGTH_SHORT)
+	                    .show();
+	
+	        }
+	
+	    }
 
 主要是 mCalcAidl.add(12, 12); ，我们继续跟进：
 
-<div class="codecolorer-container java twitlight" style="overflow:auto;white-space:nowrap;width:100%;">
-  <div class="java codecolorer">
-    @Override <br /> <span class="kw1">public</span> <span class="kw4">int</span> add<span class="br0">&#40;</span><span class="kw4">int</span> x, <span class="kw4">int</span> y<span class="br0">&#41;</span> <span class="kw1">throws</span> android.<span class="me1">os</span>.<a href="http://www.google.com/search?hl=en&q=allinurl%3Aremoteexception+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">RemoteException</span></a><br /> <span class="br0">&#123;</span><br /> &nbsp; &nbsp; android.<span class="me1">os</span>.<span class="me1">Parcel</span> _data <span class="sy0">=</span> android.<span class="me1">os</span>.<span class="me1">Parcel</span>.<span class="me1">obtain</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; android.<span class="me1">os</span>.<span class="me1">Parcel</span> _reply <span class="sy0">=</span> android.<span class="me1">os</span>.<span class="me1">Parcel</span>.<span class="me1">obtain</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; <span class="kw4">int</span> _result<span class="sy0">;</span><br /> &nbsp; &nbsp; <span class="kw1">try</span> <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; _data.<span class="me1">writeInterfaceToken</span><span class="br0">&#40;</span>DESCRIPTOR<span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; _data.<span class="me1">writeInt</span><span class="br0">&#40;</span>x<span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; _data.<span class="me1">writeInt</span><span class="br0">&#40;</span>y<span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; mRemote.<span class="me1">transact</span><span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&q=allinurl%3Astub+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Stub</span></a>.<span class="me1">TRANSACTION_add</span>, _data, _reply, <span class="nu0"></span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; _reply.<span class="me1">readException</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; _result <span class="sy0">=</span> _reply.<span class="me1">readInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; <span class="br0">&#125;</span><br /> &nbsp; &nbsp; <span class="kw1">finally</span> <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; _reply.<span class="me1">recycle</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; _data.<span class="me1">recycle</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span><br /> &nbsp; &nbsp; <span class="kw1">return</span> _result<span class="sy0">;</span><br /> <span class="br0">&#125;</span>
-  </div>
-</div>
+	@Override 
+	public int add(int x, int y) throws android.os.RemoteException
+	{
+	    android.os.Parcel _data = android.os.Parcel.obtain();
+	    android.os.Parcel _reply = android.os.Parcel.obtain();
+	    int _result;
+	    try {
+	        _data.writeInterfaceToken(DESCRIPTOR);
+	        _data.writeInt(x);
+	        _data.writeInt(y);
+	        mRemote.transact(Stub.TRANSACTION_add, _data, _reply, );
+	        _reply.readException();
+	        _result = _reply.readInt();
+	    }
+	    finally {
+	        _reply.recycle();
+	        _data.recycle();
+	        }
+	    return _result;
+	}
 
 首先声明两个Parcel对象，一个用于传递数据，一个用户接收返回的数据
 
-<div class="codecolorer-container java twitlight" style="overflow:auto;white-space:nowrap;width:100%;">
-  <div class="java codecolorer">
-    _data.<span class="me1">writeInterfaceToken</span><span class="br0">&#40;</span>DESCRIPTOR<span class="br0">&#41;</span><span class="sy0">;</span>与服务器端的enforceInterfac对应<br /> _data.<span class="me1">writeInt</span><span class="br0">&#40;</span>x<span class="br0">&#41;</span><span class="sy0">;</span><br /> _data.<span class="me1">writeInt</span><span class="br0">&#40;</span>y<span class="br0">&#41;</span><span class="sy0">;</span>写入需要传递的参数<br /> <br /> mRemote.<span class="me1">transact</span><span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&q=allinurl%3Astub+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">Stub</span></a>.<span class="me1">TRANSACTION_add</span>, _data, _reply, <span class="nu0"></span><span class="br0">&#41;</span><span class="sy0">;</span>
-  </div>
-</div>
+	_data.writeInterfaceToken(DESCRIPTOR);与服务器端的enforceInterfac对应
+	_data.writeInt(x);
+	_data.writeInt(y);写入需要传递的参数
 
 调用了mRemote.transact方法，请注意这个mRemote正是在绑定服务成功时 onServiceConnected 方法返回的IBinder实例。
 
@@ -98,7 +129,7 @@ Binder驱动：该对象也为Binder类的实例，客户端通过该对象访�
 
 可以看到onTransact有四个参数
 
-code ， data ，replay ， flags
+	code ， data ，replay ， flags
 
 code 是一个整形的唯一标识，用于区分执行哪个方法，客户端会传递此参数，告诉服务端执行哪个方法
 
@@ -108,9 +139,9 @@ replay服务器返回回去的值
 
 flags标明是否有返回值，0为有（双向），1为没有（单向）
 
-_reply.readException();
+	_reply.readException();
   
-\_result = \_reply.readInt();
+	\_result = \_reply.readInt();
 
 最后读出我们服务端返回的数据，然后return。可以看到和服务端的onTransact基本是一模一样的。
 
@@ -122,20 +153,79 @@ _reply.readException();
 
 客户端：
 
-<div class="codecolorer-container java twitlight" style="overflow:auto;white-space:nowrap;width:100%;height:100%;">
-  <div class="java codecolorer">
-    &nbsp; &nbsp; <span class="kw1">public</span> <span class="kw4">void</span> mulInvoked<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&q=allinurl%3Aview+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">View</span></a> view<span class="br0">&#41;</span><br /> &nbsp; &nbsp; <span class="br0">&#123;</span><br /> <br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">if</span> <span class="br0">&#40;</span>mPlusBinder <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Toast.<span class="me1">makeText</span><span class="br0">&#40;</span><span class="kw1">this</span>, <span class="st0">"未连接服务端或服务端被异常杀死"</span>, Toast.<span class="me1">LENGTH_SHORT</span><span class="br0">&#41;</span>.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span> <span class="kw1">else</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; android.<span class="me1">os</span>.<span class="me1">Parcel</span> _data <span class="sy0">=</span> android.<span class="me1">os</span>.<span class="me1">Parcel</span>.<span class="me1">obtain</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; android.<span class="me1">os</span>.<span class="me1">Parcel</span> _reply <span class="sy0">=</span> android.<span class="me1">os</span>.<span class="me1">Parcel</span>.<span class="me1">obtain</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw4">int</span> _result<span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">try</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _data.<span class="me1">writeInterfaceToken</span><span class="br0">&#40;</span><span class="st0">"CalcPlusService"</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _data.<span class="me1">writeInt</span><span class="br0">&#40;</span><span class="nu0">50</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _data.<span class="me1">writeInt</span><span class="br0">&#40;</span><span class="nu0">12</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mPlusBinder.<span class="me1">transact</span><span class="br0">&#40;</span>0x110, _data, _reply, <span class="nu0"></span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _reply.<span class="me1">readException</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _result <span class="sy0">=</span> _reply.<span class="me1">readInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Toast.<span class="me1">makeText</span><span class="br0">&#40;</span><span class="kw1">this</span>, _result <span class="sy0">+</span> <span class="st0">""</span>, Toast.<span class="me1">LENGTH_SHORT</span><span class="br0">&#41;</span>.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&q=allinurl%3Aremoteexception+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">RemoteException</span></a> e<span class="br0">&#41;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span> <span class="kw1">finally</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _reply.<span class="me1">recycle</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _data.<span class="me1">recycle</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span><br /> <br /> &nbsp; &nbsp; <span class="br0">&#125;</span>
-  </div>
-</div>
+	public void mulInvoked(View view)
+	    {
+	
+	        if (mPlusBinder == null)
+	        {
+	            Toast.makeText(this, "未连接服务端或服务端被异常杀死", Toast.LENGTH_SHORT).show();
+	        } else
+	        {
+	            android.os.Parcel _data = android.os.Parcel.obtain();
+	            android.os.Parcel _reply = android.os.Parcel.obtain();
+	            int _result;
+	            try
+	            {
+	                _data.writeInterfaceToken("CalcPlusService");
+	                _data.writeInt(50);
+	                _data.writeInt(12);
+	                mPlusBinder.transact(0x110, _data, _reply, );
+	                _reply.readException();
+	                _result = _reply.readInt();
+	                Toast.makeText(this, _result + "", Toast.LENGTH_SHORT).show();
+	
+	            } catch (RemoteException e)
+	            {
+	                e.printStackTrace();
+	            } finally
+	            {
+	                _reply.recycle();
+	                _data.recycle();
+	            }
+	        }
+	
+	    }
 
 mPlusBinder 为绑定服务后返回的接口，在服务端中实现。
 
 具体实现如下：
 
-<div class="codecolorer-container java twitlight" style="overflow:auto;white-space:nowrap;width:100%;height:100%;">
-  <div class="java codecolorer">
-    &nbsp; &nbsp; <span class="kw1">private</span> MyBinder mBinder <span class="sy0">=</span> <span class="kw1">new</span> MyBinder<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> <br /> &nbsp; &nbsp; <span class="kw1">private</span> <span class="kw1">class</span> MyBinder <span class="kw1">extends</span> Binder<br /> &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; @Override<br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">protected</span> <span class="kw4">boolean</span> onTransact<span class="br0">&#40;</span><span class="kw4">int</span> code, Parcel data, Parcel reply,<br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw4">int</span> flags<span class="br0">&#41;</span> <span class="kw1">throws</span> <a href="http://www.google.com/search?hl=en&q=allinurl%3Aremoteexception+java.sun.com&btnI=I%27m%20Feeling%20Lucky"><span class="kw3">RemoteException</span></a><br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">switch</span> <span class="br0">&#40;</span>code<span class="br0">&#41;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">case</span> 0x110<span class="sy0">:</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; data.<span class="me1">enforceInterface</span><span class="br0">&#40;</span>DESCRIPTOR<span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw4">int</span> _arg0<span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _arg0 <span class="sy0">=</span> data.<span class="me1">readInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw4">int</span> _arg1<span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _arg1 <span class="sy0">=</span> data.<span class="me1">readInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw4">int</span> _result <span class="sy0">=</span> _arg0 <span class="sy0">*</span> _arg1<span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; reply.<span class="me1">writeNoException</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; reply.<span class="me1">writeInt</span><span class="br0">&#40;</span>_result<span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">case</span> 0x111<span class="sy0">:</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; data.<span class="me1">enforceInterface</span><span class="br0">&#40;</span>DESCRIPTOR<span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw4">int</span> _arg0<span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _arg0 <span class="sy0">=</span> data.<span class="me1">readInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw4">int</span> _arg1<span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _arg1 <span class="sy0">=</span> data.<span class="me1">readInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw4">int</span> _result <span class="sy0">=</span> _arg0 <span class="sy0">/</span> _arg1<span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; reply.<span class="me1">writeNoException</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; reply.<span class="me1">writeInt</span><span class="br0">&#40;</span>_result<span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">return</span> <span class="kw1">super</span>.<span class="me1">onTransact</span><span class="br0">&#40;</span>code, data, reply, flags<span class="br0">&#41;</span><span class="sy0">;</span><br /> &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span><br /> <br /> &nbsp; &nbsp; <span class="br0">&#125;</span><span class="sy0">;</span>
-  </div>
-</div>
+	private MyBinder mBinder = new MyBinder();
+	
+	    private class MyBinder extends Binder
+	    {
+	        @Override
+	        protected boolean onTransact(int code, Parcel data, Parcel reply,
+	                int flags) throws RemoteException
+	        {
+	            switch (code)
+	            {
+	            case 0x110:
+	            {
+	                data.enforceInterface(DESCRIPTOR);
+	                int _arg0;
+	                _arg0 = data.readInt();
+	                int _arg1;
+	                _arg1 = data.readInt();
+	                int _result = _arg0 * _arg1;
+	                reply.writeNoException();
+	                reply.writeInt(_result);
+	                return true;
+	            }
+	            case 0x111:
+	            {
+	                data.enforceInterface(DESCRIPTOR);
+	                int _arg0;
+	                _arg0 = data.readInt();
+	                int _arg1;
+	                _arg1 = data.readInt();
+	                int _result = _arg0 / _arg1;
+	                reply.writeNoException();
+	                reply.writeInt(_result);
+	                return true;
+	            }
+	            }
+	            return super.onTransact(code, data, reply, flags);
+	        }
 
 这样就直接使用了Binder机制。通过这些例子，是否更了解Binder一点了呢~感谢大牛的博客和资源！

@@ -15,7 +15,7 @@ tags:
 
 下面是原文和我在操作时遇到的问题：
   
-# **申请Bintray账号(需要翻墙,如何翻请自行度娘~)** #
+ **申请Bintray账号(需要翻墙,如何翻请自行度娘~)** 
 
 Bintray的基本功能类似于Maven Central，一样的我们需要一个账号，<a title="传送门" href="https://bintray.com/" target="_blank">Bintray传送门</a>，注册完成后第一步算完成了。
 
@@ -147,7 +147,7 @@ Rebuild一下项目，顺利的话**(不顺利,这里会报一个错（Error:Cau
 
     gradlew install
 
-# 上传到Bintray #
+ 上传到Bintray 
 
 上传到Bintray需要gradle-bintray-plugin的支持，所以在最外层的build.gradle里添加构建依赖：
 

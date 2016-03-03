@@ -78,23 +78,23 @@ d.Application会多次创建
   
 用一段伪代码描述三个方法的关系：
   
-public boolean dispatchTouchEvent(MotionEvent ev){
-  
-boolean consume = false;
-  
-if( onInterceptTouchEvent(ev) ){
-  
-consume = onTouchEvent(ev);
-  
-} else {
-  
-consume = child.dispatchTouchEvent(ev);
-  
-}
-  
-return consume;
-  
-}
+	public boolean dispatchTouchEvent(MotionEvent ev){
+	  
+	boolean consume = false;
+	  
+	if( onInterceptTouchEvent(ev) ){
+	  
+	consume = onTouchEvent(ev);
+	  
+	} else {
+	  
+	consume = child.dispatchTouchEvent(ev);
+	  
+	}
+	  
+	return consume;
+	  
+	}
   
 8.拦截的一定是事件序列：不消耗ACTION\_DOWN，则事件序列都会由其父元素处理；只消耗ACTION\_DOWN事件，该事件会消失，消失的事件最终会交给Activity来处理；requestDisallowInterceptTouchEvent方法可以在子元素中干预父元素的事件分发过程，除了ACTION_DOWN。
   
@@ -217,16 +217,16 @@ FLAG\_EXCLUDE\_STOPPED_PACKAGES：不包含已经停止的包
 由此，对于系统广播，由于是系统内部直接发出，无法更改此intent flag值，因此，3.1开始对于静态注册的接收系统广播的BroadcastReceiver，如果App进程已经退出，将不能接收到广播。
   
 但是对于自定义的广播，可以通过复写此flag为FLAG\_INCLUDE\_STOPPED_PACKAGES，使得静态注册的BroadcastReceiver，即使所在App进程已经退出，也能能接收到广播，并会启动应用进程，但此时的BroadcastReceiver是重新新建的。
-
-1 Intent intent = new Intent();
-  
-2 intent.setAction(BROADCAST_ACTION);
-  
-3 intent.addFlags(Intent.FLAG\_INCLUDE\_STOPPED_PACKAGES);
-  
-4 intent.putExtra(&#8220;name&#8221;, &#8220;qqyumidi&#8221;);
-  
-5 sendBroadcast(intent);
+	
+	1 Intent intent = new Intent();
+	  
+	2 intent.setAction(BROADCAST_ACTION);
+	  
+	3 intent.addFlags(Intent.FLAG\_INCLUDE\_STOPPED_PACKAGES);
+	  
+	4 intent.putExtra(&#8220;name&#8221;, &#8220;qqyumidi&#8221;);
+	  
+	5 sendBroadcast(intent);
 
 注1：对于动态注册类型的BroadcastReceiver，由于此注册和取消注册实在其他组件（如Activity）中进行，因此，不受此改变影响。
   
