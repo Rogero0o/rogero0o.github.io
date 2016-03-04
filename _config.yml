@@ -62,7 +62,7 @@ duoshuo_share: true                     # set to false if you want to use Commen
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "请微笑,因为今天将是你余生中最年轻的一天"
+sidebar-about-description: "请微笑<br>因为今天将是余生中最年轻的一天"
 sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
