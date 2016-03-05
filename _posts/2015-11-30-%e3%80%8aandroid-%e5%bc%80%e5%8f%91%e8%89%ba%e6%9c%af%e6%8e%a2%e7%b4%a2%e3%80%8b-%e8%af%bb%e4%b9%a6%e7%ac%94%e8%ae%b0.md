@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "《Android 开发艺术探索》 读书笔记"
-subtitle:   "Note about <Android 开发艺术探索>"
+subtitle:   "Note about 《Android 开发艺术探索》"
 date: 2015-11-30T10:47:07+00:00
 author:     "Roger"
 header-img: "img/android-bg8.jpg"
