@@ -160,6 +160,7 @@ JAVA:
 再通过查询调用者，我们会发现主要有以下代码将影响改值：
 
 1. 从停止到非停止状态（成功启动该应用中的四大组件即可）
+
   * ActivityStack中
       
 		      1426        // Launching this app's activity, make sure the app is no longer
@@ -194,6 +195,7 @@ JAVA:
 		      845            }
       
 2. 从非停止状态到停止状态（初始化以及设置中点击强制停止）
+
   * 在/frameworks/base/services/java/com/android/server/pm/Settings.java 中 有对 "packages-stopped.xml"文件的读操作，未找到写操作，但我相信在应用安装成功后会加入"packages-stopped.xml"文件中
   
   * 设置中点击强制停止 /packages/apps/Settings/src/com/android/settings/applications/ProcessStatsDetail.java：
