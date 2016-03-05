@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "android studio项目发布到jcenter 要点记录"
-subtitle:   "要点记录"
+subtitle:   "Release your Andorid studio project to jcenter"
 date: 2015-09-25T17:39:22+00:00
 author:     "Roger"
 header-img: "img/android-bg3.jpg"
@@ -10,12 +10,12 @@ tags:
 ---
 
 很多时候我们自己写了库，需要放到jcenter中以便快速的提供他人使用，以下记录了一些我在发布中遇到的问题，主要参考以下页面进行配置：
-  
+
 <a title="Rocko的博客" href="http://rocko.xyz/2015/02/02/%e4%bd%bf%e7%94%a8Gradle%e5%8f%91%e5%b8%83%e9%a1%b9%e7%9b%ae%e5%88%b0JCenter%e4%bb%93%e5%ba%93/" target="_blank">Rocko的博客</a>
 
 下面是原文和我在操作时遇到的问题：
-  
- **申请Bintray账号(需要翻墙,如何翻请自行度娘~)** 
+
+ **申请Bintray账号(需要翻墙,如何翻请自行度娘~)**
 
 Bintray的基本功能类似于Maven Central，一样的我们需要一个账号，<a title="传送门" href="https://bintray.com/" target="_blank">Bintray传送门</a>，注册完成后第一步算完成了。
 
@@ -147,7 +147,7 @@ Rebuild一下项目，顺利的话**(不顺利,这里会报一个错（Error:Cau
 
     gradlew install
 
- 上传到Bintray 
+ 上传到Bintray
 
 上传到Bintray需要gradle-bintray-plugin的支持，所以在最外层的build.gradle里添加构建依赖：
 
@@ -172,7 +172,7 @@ Rebuild一下，然后执行如下命令(Windows中)完成上传：
     gradlew bintrayUpload
 
 **（我在这一步一直提示网络错误,后来加了调试信息gradlew bintrayUpload &#8211;stackover &#8211;debug 就成功鸟..不知为何）**
-  
+
 上传完成即可在Bintray网站上找到你的Repo，我们需要完成最后一步工作，申请你的Repo添加到JCenter。可以进入这个页面,输入你的项目名字点击匹配到的项目，然后写一写Comments再send即可，然后就等管理员批准了，我是大概等了40分钟，然后网站上会给你一条通过信息，然后就OK了，大功告成。**（我等了好几个小时 0 0）**
 
 成功后就可以在其它项目里方便的使用你发布的项目了：

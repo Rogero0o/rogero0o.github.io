@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "AIDL与Binder机制学习笔记"
-subtitle:   "源码解析"
+subtitle:   "The note about AIDL and Binder"
 date: 2015-09-25T17:39:22+00:00
 author:     "Roger"
 header-img: "img/android-bg6.jpg"
@@ -27,7 +27,7 @@ Binder驱动：该对象也为Binder类的实例，客户端通过该对象访�
 客户端接口：获得Binder驱动，调用其transact()发送消息至服务器
 
 最简单的实现Binder机制的方法就是AIDL了，先分析一下AIDL中的Binder机制。
-  
+
 <!--more-->
 
 代码可以参考源码中的 zhy\_binder\_aidl\_server02（服务端） 和 zhy\_binder_client02-tmp （客户端），运行结果请参考博客 <a href="http://blog.csdn.net/lmj623565791/article/details/38461079" title="Android aidl Binder框架浅析" target="_blank">Android aidl Binder框架浅析</a>
@@ -45,7 +45,7 @@ Binder驱动：该对象也为Binder类的实例，客户端通过该对象访�
 	            Log.e("client", "onServiceDisconnected");
 	            mCalcAidl = null;
 	        }
-	
+
 	        @Override
 	        public void onServiceConnected(ComponentName name, IBinder service)
 	        {
@@ -76,7 +76,7 @@ Binder驱动：该对象也为Binder类的实例，客户端通过该对象访�
 	     */
 	    public void addInvoked(View view) throws Exception
 	    {
-	
+
 	        if (mCalcAidl != null)
 	        {
 	            int addRes = mCalcAidl.add(12, 12);
@@ -85,14 +85,14 @@ Binder驱动：该对象也为Binder类的实例，客户端通过该对象访�
 	        {
 	            Toast.makeText(this, "服务器被异常杀死，请重新绑定服务端", Toast.LENGTH_SHORT)
 	                    .show();
-	
+
 	        }
-	
+
 	    }
 
 主要是 mCalcAidl.add(12, 12); ，我们继续跟进：
 
-	@Override 
+	@Override
 	public int add(int x, int y) throws android.os.RemoteException
 	{
 	    android.os.Parcel _data = android.os.Parcel.obtain();
@@ -124,7 +124,7 @@ Binder驱动：该对象也为Binder类的实例，客户端通过该对象访�
 开始我们就说到 客户端的动作主要是获得Binder驱动，调用其transact()发送消息至服务器，具体代码实现就是这一步了。mRemote就是Binder驱动。
 
 再深入进去请参考<a href="http://blog.csdn.net/luoshengyang/article/details/6642463" title="Android系统进程间通信Binder机制在应用程序框架层的Java接口源代码分析" target="_blank">Android系统进程间通信Binder机制在应用程序框架层的Java接口源代码分析</a>中的
-  
+
 五. Client通过HelloService的Java远程接口来使用HelloService提供的服务的过程
 
 可以看到onTransact有四个参数
@@ -140,13 +140,13 @@ replay服务器返回回去的值
 flags标明是否有返回值，0为有（双向），1为没有（单向）
 
 	_reply.readException();
-  
+
 	\_result = \_reply.readInt();
 
 最后读出我们服务端返回的数据，然后return。可以看到和服务端的onTransact基本是一模一样的。
 
 综上所述，AIDL其实是以一套模板自动生成了调用Binder机制的java代码，其中客户端主要使用 asInterface 方法来获得服务端的Binder驱动，并通过驱动来调用服务端实现的 onTransact 方法，进而调用具体实现。
-  
+
 其实完全可以不用AIDL自己实现Binder机制，具体代码在 zhy\_binder\_aidl\_server02（服务端）和 zhy\_binder_client03 （客户端）中
 
 由乘法为例：
@@ -155,7 +155,7 @@ flags标明是否有返回值，0为有（双向），1为没有（单向）
 
 	public void mulInvoked(View view)
 	    {
-	
+
 	        if (mPlusBinder == null)
 	        {
 	            Toast.makeText(this, "未连接服务端或服务端被异常杀死", Toast.LENGTH_SHORT).show();
@@ -173,7 +173,7 @@ flags标明是否有返回值，0为有（双向），1为没有（单向）
 	                _reply.readException();
 	                _result = _reply.readInt();
 	                Toast.makeText(this, _result + "", Toast.LENGTH_SHORT).show();
-	
+
 	            } catch (RemoteException e)
 	            {
 	                e.printStackTrace();
@@ -183,7 +183,7 @@ flags标明是否有返回值，0为有（双向），1为没有（单向）
 	                _data.recycle();
 	            }
 	        }
-	
+
 	    }
 
 mPlusBinder 为绑定服务后返回的接口，在服务端中实现。
@@ -191,7 +191,7 @@ mPlusBinder 为绑定服务后返回的接口，在服务端中实现。
 具体实现如下：
 
 	private MyBinder mBinder = new MyBinder();
-	
+
 	    private class MyBinder extends Binder
 	    {
 	        @Override

@@ -9,7 +9,7 @@ tags:
     - 翻译
 ---
 原文地址：<a title="Link" href="http://android-developers.blogspot.jp/2016/02/android-support-library-232.html" target="_blank">Link</a>.
-  
+
 第一次翻译,若有错误请指出。:)
 
 **Android Support Library 23.2**
@@ -34,7 +34,7 @@ Android studio 1.4 通过在编译期间生成png图片来实现对矢量图的�
 	}
 
 如果是 gradle1.5，则需要这样写
-	
+
 	// Gradle Plugin 2.0+
 	android {
 	    defaultConfig {
@@ -46,9 +46,9 @@ Android studio 1.4 通过在编译期间生成png图片来实现对矢量图的�
 	android {
 	    defaultConfig {
 	        generatedDensities = []
-	    } 
-	
-	
+	    }
+
+
 	// This is handled for you by the 2.0+ Gradle Plugin
 	    aaptOptions {
 	        additionalParameters "--no-version-vectors"
@@ -67,7 +67,7 @@ VectorDrawableCompat 最低支持到 API7 ， AnimatedVectorDrawableCompat 最�
 如果需要在运行时切换图片，使用和之前一样的方法 setImageResource()。使用兼容包和 app:srcCompat是将矢量图整合进APP中最简单有效的方法。
 
 你会发现在棒棒糖中不使用 app:srcCompat 引用矢量图的方法都会失败。然而，当矢量图被 另一个 drawable容器（例如 StateListDrawable, InsetDrawable, LayerDrawable, LevelListDrawable,和 RotateDrawable）引用时，兼容包是可以加载该矢量图的。所以，在一些无法直接使用兼容包（直接使用app:srcCompat）的地方，可以通过间接的方式来使用矢量图，例如 TextView 的 android:drawleLeft 属性。
-  
+
 <!--more-->
 
 **AppCompat DayNight theme**
@@ -93,21 +93,21 @@ VectorDrawableCompat 最低支持到 API7 ， AnimatedVectorDrawableCompat 最�
 [<img src="http://2.rogerbolg.sinaapp.com/wp-content/uploads/2016/02/image06.png" alt="image06" width="360" height="640" class="aligncenter size-full wp-image-196" />](http://2.rogerbolg.sinaapp.com/wp-content/uploads/2016/02/image06.png)
 
 在 CoordinatorLayout （即增加属性 app:layout_behavior=”android.support.design.widget.BottomSheetBehavior” ）的子view附上一个 BottomSheetBehavior ，你将会得到五个状态的触摸回调。
-  
+
 1.STATE\_COLLAPSED，这个关闭的状态是默认的，沿着父视图的下沿显示一小部分，显示的高度可以通过 app:behavior\_peekHeight 属性设置，默认是0
-  
+
 2.STATE_DRAGGING，中间状态，表示用户正在打开或者关闭抽屉（sheet）
-  
+
 3.STATE_SETTLING，抽屉从被放开运行到最终位置的状态
-  
+
 4.STATE_EXPANDED，抽屉被完全打开的状态，即抽屉的高度完全显示出来（当抽屉高度小于主视图时）或是主视图被抽屉完全充满时。
-  
+
 5.STATE\_HIDDEN，抽屉完全不可见的默认状态，（app:behavior\_hideable 属性可以设置），打开这个允许用户向下滑动直至完全关闭抽屉。
 
 如果你的抽屉（sheet）中有需要滑动的试图，请务必确保它能支持嵌套滑动（例如 NestedScrollView, RecyclerView, or ListView/ScrollView on API 21+）。
 
 如果你需要接受状态回调，可以添加一个 BottomSheetCallback:
-	
+
 	// The View with the BottomSheetBehavior  
 	 View bottomSheet = coordinatorLayout.findViewById(R.id.bottom_sheet);  
 	 BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);  
