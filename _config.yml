@@ -53,7 +53,7 @@ duoshuo_share: true                     # set to false if you want to use Commen
 
 # Analytics settings
 # Baidu Analytics
-# ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
+# ba_track_id: 853eb60823139dbd2366d07044f623aa
 # Google Analytics
 # ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
 # ga_domain: huangxuan.me
@@ -76,7 +76,20 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 friends: [
     {
-        title: "Roger Blog",
-        href: "http://www.rogerblog.cn"
+        title: "daimajia",
+        href: "http://blog.daimajia.com/"
+    },
+    {
+        title: "Drakeet",
+        href: "http://drakeet.me/"
+    },
+    {
+        title: "Trinea",
+        href: "http://www.trinea.cn/"
+    },
+    {
+        title: "stormzhang",
+        href: "http://www.stormzhang.com/"
     }
+
 ]
