@@ -45,14 +45,14 @@ AndroidManifest.xml：
 	       <action android:name="android.intent.action.BOOT_COMPLETED" />
 	       <action android:name="com.roger.broadcast.test" />
 	   </intent-filter>
-	</receiver> 
+	</receiver>
 ```
 
-	
+
 JAVA:
 
 	public class Receiver extends BroadcastReceiver {
-	
+
 		@Override
 		public void onReceive(Context arg0, Intent arg1) {
 			// TODO Auto-generated method stub
@@ -162,51 +162,51 @@ JAVA:
 * 从停止到非停止状态（成功启动该应用中的四大组件即可）
 
   * ActivityStack中
-      
+
 		      1426        // Launching this app's activity, make sure the app is no longer
 		      1427        // considered stopped.
 		      1428        try {
 		      1429            AppGlobals.getPackageManager().setPackageStoppedState(
 		      1430                    next.packageName, false, next.userId); /* TODO: Verify if correct userid */
 		      1431        }
-      
+
   * ActiveServices中
-      
+
 		      1223        // Service is now being launched, its package can't be stopped.
 		      1224        try {
 		      1225            AppGlobals.getPackageManager().setPackageStoppedState(
 		      1226                    r.packageName, false, r.userId);
 		      1227        }
-      
+
   * ActivityManagerService中
-      
+
 		      7548                        // Content provider is now in use, its package can't be stopped.
 		      7549                        try {
 		      7550                            AppGlobals.getPackageManager().setPackageStoppedState(
 		      7551                                    cpr.appInfo.packageName, false, userId);
 		      7552                        }
-      
+
   * BroadcastQueue中
-      
+
 		      841            // Broadcast is being executed, its package can't be stopped.
 		      842            try {
 		      843                AppGlobals.getPackageManager().setPackageStoppedState(
 		      844                        r.curComponent.getPackageName(), false, UserHandle.getUserId(r.callingUid));
 		      845            }
-      
+
 * 从非停止状态到停止状态（初始化以及设置中点击强制停止）
 
   * 在/frameworks/base/services/java/com/android/server/pm/Settings.java 中 有对 "packages-stopped.xml"文件的读操作，未找到写操作，但我相信在应用安装成功后会加入"packages-stopped.xml"文件中
-  
+
   * 设置中点击强制停止 /packages/apps/Settings/src/com/android/settings/applications/ProcessStatsDetail.java：
-        
+
 	        279    private void killProcesses() {
 	        280        ActivityManager am = (ActivityManager)getActivity().getSystemService(
 	        281                Context.ACTIVITY_SERVICE);
 	        282        am.forceStopPackage(mEntry.mUiPackage);
 	        283        checkForceStop();
 	        284    }
-        
+
 
 至此，通过源码我们已经了解，如果新安装的应用，未曾成功启动过四大组件，默认是处于停止状态的，这也是Google对系统的保护想要达到的效果。
 
