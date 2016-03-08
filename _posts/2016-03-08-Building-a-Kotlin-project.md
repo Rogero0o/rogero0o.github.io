@@ -2,13 +2,12 @@
 layout:     post
 title:      "Kotlin实践"
 subtitle:   "Building a Kotlin project"
-date: 2016-03-08T12:00:19+00:00
+date: 2016-03-08 13:12:01 +0800
 author:     "Roger"
 header-img: "img/home-bg-o.jpg"
 tags:
     - 翻译
 ---
-
 #Building a Kotlin project
 
 
