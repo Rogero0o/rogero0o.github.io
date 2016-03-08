@@ -8,21 +8,23 @@ header-img: "img/home-bg-o.jpg"
 tags:
     - 翻译
 ---
-#Building a Kotlin project
-
+Building a Kotlin project
+=============
 
 > * 原文链接 : [Building a Kotlin project](http://www.cirorizzo.net/2016/03/04/building-a-kotlin-project/)
 * 原文作者 : [Ciro Rizzo](http://www.cirorizzo.net/)
 * 译者 : [rogero0o](https://github.com/Rogero0o)
 
 
-## Part 1
+ Part 1
+-------------
 
 学一门新语言最好的方法就是写一个实际的Dem.
 
 所以这个系列的博客将专注于使用 Kotlin 写一个小例子.
 
-## Scenario （要求）
+Scenario （要求）
+-------------
 
 为了覆盖各种情景,这个DEMO必须要有以下要求：
 
@@ -33,38 +35,38 @@ tags:
 
 ![](http://www.cirorizzo.net/content/images/2016/03/xkittenApp.png.pagespeed.ic.ulo4yWl6Cg.png)
 
-## Dependencies （依赖库）
-
+Dependencies （依赖库）
+-------------
 这可是个使用一些很腻害的依赖库的好机会，比如说：
 
-- Retrofit2 用来请求网络，访问REST API以及数据的反序列化 
+- Retrofit2 用来请求网络，访问REST API以及数据的反序列化
 - Glide 用来显示图片
 - RxJava 来绑定数据
 - RecyclerView CardView 支持界面显示
 - 整体框架将使用MVP
 
-## Set Up the Project （建立工程）
-
+Set Up the Project （建立工程）
+-------------
 使用 Android Studio 来创建新工程将会非常简单
 
-##### Start a new Android Project （创建一个新 Android 工程）
-
+Start a new Android Project （创建一个新 Android 工程）
+-------------
 ![](http://www.cirorizzo.net/content/images/2016/03/xAndroidStudio_NewProject.png.pagespeed.ic.7fDR0qSTJd.png)
 
-##### Create a new project （ 创建一个项目）
-
+Create a new project （ 创建一个项目）
+-------------
 ![](http://www.cirorizzo.net/content/images/2016/03/xAndroidStudio_NewProject_Create_NEW-1.png.pagespeed.ic.rtJ-FIVYiG.png)
 
-##### Select Target Android Device （选择需要的android版本）
-
+Select Target Android Device （选择需要的android版本）
+-------------
 ![](http://www.cirorizzo.net/content/images/2016/03/xAndroidStudio_NewProject_Target.png.pagespeed.ic.bXlb6fWH62.png)
 
-##### Add an activity （添加 activity）
-
+Add an activity （添加 activity）
+-------------
 ![](http://www.cirorizzo.net/content/images/2016/03/xAndroidStudio_NewProject_Empty.png.pagespeed.ic.VYxIdhZ3Xk.png)
 
-##### Customize the Activity （选择样式）
-
+Customize the Activity （选择样式）
+-------------
 ![](http://www.cirorizzo.net/content/images/2016/03/xAndroidStudio_NewProject_Activity.png.pagespeed.ic.3g2X5Gs9Bn.png)
 
 点击完成，刚刚配置的模板工程将被创建。
@@ -75,8 +77,8 @@ tags:
 
 然而这时候代码还是 java ， 接下来我们将它处理成kitten.
 
-## Defining Gradle Build Tool
-
+Defining Gradle Build Tool
+-------------
 下一步我们将升级 Build Tool 并且 将那些库我们将会用到库引用进来.
 
 开始这步之前，请查看 Android Kotlin 需要的环境支持 [post](http://www.cirorizzo.net/kotlin-code/)
@@ -92,28 +94,28 @@ tags:
 	buildscript {
 	  ext.compileSdkVersion_ver = 23
 	  ext.buildToolsVersion_ver = '23.0.2'
-	
+
 	  ext.minSdkVersion_ver = 21
 	  ext.targetSdkVersion_ver = 23
 	  ext.versionCode_ver = 1
 	  ext.versionName_ver = '1.0'
-	
+
 	  ext.support_ver = '23.1.1'
-	
+
 	  ext.kotlin_ver = '1.0.0'
 	  ext.anko_ver = '0.8.2'
-	
+
 	  ext.glide_ver = '3.7.0'
 	  ext.retrofit_ver = '2.0.0-beta4'
 	  ext.rxjava_ver = '1.1.1'
 	  ext.rxandroid_ver = '1.1.0'
-	
+
 	  ext.junit_ver = '4.12'
-	
+
 	  repositories {
 	      mavenCentral()
 	  }
-	
+
 	  dependencies {
 	      classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_ver"
 	  }
@@ -131,7 +133,7 @@ tags:
 	android {
 	  compileSdkVersion "$compileSdkVersion_ver".toInteger()
 	  buildToolsVersion "$buildToolsVersion_ver"
-	
+
 	  defaultConfig {
 	    applicationId "com.github.cirorizzo.kshows"
 	    minSdkVersion "$minSdkVersion_ver".toInteger()
@@ -151,7 +153,7 @@ tags:
 	        minifyEnabled false
 	        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 	    }
-	
+
 	    release {
 	        buildConfigField("int", "MAX_IMAGES_PER_REQUEST", "500")
 	        debuggable false
@@ -169,22 +171,22 @@ tags:
 	dependencies {
 	  compile fileTree(dir: 'libs', include: ['*.jar'])
 	  testCompile "junit:junit:$junit_ver"
-	
+
 	  compile "com.android.support:appcompat-v7:$support_ver"
 	  compile "com.android.support:cardview-v7:$support_ver"
 	  compile "com.android.support:recyclerview-v7:$support_ver"
 	  compile "com.github.bumptech.glide:glide:$glide_ver"
-	
+
 	  compile "com.squareup.retrofit2:retrofit:$retrofit_ver"
 	  compile ("com.squareup.retrofit2:converter-simplexml:$retrofit_ver") {
 	    exclude module: 'xpp3'
 	    exclude group: 'stax'
 	}
-	
+
 	  compile "io.reactivex:rxjava:$rxjava_ver"
 	  compile "io.reactivex:rxandroid:$rxandroid_ver"
 	  compile "com.squareup.retrofit2:adapter-rxjava:$retrofit_ver"
-	
+
 	  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_ver"
 	  compile "org.jetbrains.anko:anko-common:$anko_ver"
 	}
@@ -198,26 +200,26 @@ tags:
 
 可以进入下一步了
 
-## Designing Project Structure （设计项目的结构）
-
+Designing Project Structure （设计项目的结构）
+-------------
 另一个好习惯是 根据在项目中类的不同用途来设计包和文件夹，将相同类型的类放在一个包中，我们可以这样设计项目的结构：
 
 ![](data:image/png;base64,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)
 
 右键点击 com.github.cirorizzo.kshows 包，然后选择 New ->Package
 
-## Coding（写代码！）
-
+Coding（写代码！）
+-------------
 下一篇将介绍如何编写 Kitten app
 
-## Part 2
-
+ Part 2
+-------------
 上一篇我们介绍了如何创建一个项目，并且对 Kitten APP 需要的 build.gradle 文件进行设置
 
 下一步我们将开始对app进行编写
 
-## Data Model （数据模型）
-
+ Data Model （数据模型）
+-------------
 项目中的一个重要功能就是通过网络请求网站 http://thecatapi.com 中的数据
 
 完整的域名将是 http://thecatapi.com/api/images/get?format=xml&results_per_page=10
@@ -235,9 +237,9 @@ Kotlin 有一个非常适合的 class 叫做 data class 完美适合这样的需
 为了构建解析xml的class，Cats.kt 是这样的
 
 	data class Cats(var data: Data? = null)
-	
+
 	data class Data(var images: ArrayList<Image>? = null)
-	
+
 	data class Image(var url: String? = "", var id: String? = "", var source_url: String? = "")
 
 
@@ -247,8 +249,8 @@ Kotlin 有一个非常适合的 class 叫做 data class 完美适合这样的需
 
 Kotlin的data class 有很多特点，比如说 对 getter(), setter() 和 toString() 方法的自动生成，对于 equals() hashCode() 和 copy()也是一样的，所以对于解析数据这真是完美啊
 
-## API Call
-
+ API Call
+-------------
 访问网络有许多种方法，也有很多支持库，其中有一个来自Square的Retrofit2
 
 这是一个非常强大的 HTTPClient 而且非常容易使用
@@ -286,9 +288,9 @@ CatAPI 这个接口非常有趣，这个方法调用请求，并返回回调 ，
 	            .addConverterFactory(SimpleXmlConverterFactory.create())
 	            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
 	            .build()
-	
+
 	        val catAPI: CatAPI = retrofit.create(CatAPI::class.java)
-	
+
 	        return catAPI.getCatImageURLs().
 	            subscribeOn(Schedulers.io()).
 	            observeOn(AndroidSchedulers.mainThread())
@@ -299,7 +301,7 @@ fun getExec(): Observable<Cats> 这个方法被设置成 public 的意味着它�
 
 .addConverterFactory(SimpleXmlConverterFactory.create())这一行说明了使用XML转换器来解析从API获得的数据
 
-然后 .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) 在AIP回调中调用了方法使 adapter 被使用 
+然后 .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) 在AIP回调中调用了方法使 adapter 被使用
 
 return 的这一行请参照  RxJava Observable
 
@@ -307,8 +309,8 @@ return 的这一行请参照  RxJava Observable
 	            subscribeOn(Schedulers.io()).
 	            observeOn(AndroidSchedulers.mainThread())
 
-## Presenter（提供者）
-
+ Presenter（提供者）
+-------------
 这个 Presenter 负责的是APP中的逻辑 还有将数据从model层绑定到试图层的业务逻辑
 
 在我们的使用中它将实现一些 被试图层调用返回数据的方法，并且将这些数据提供给adapter以供呈现
@@ -326,15 +328,15 @@ return 的这一行请参照  RxJava Observable
 
 	class MasterPresenterImpl : MasterPresenter {
 	    lateinit private var imagesAdapter: ImagesAdapter
-	
+
 	    override fun connect(imagesAdapter: ImagesAdapter) {
 	        this.imagesAdapter = imagesAdapter
 	    }
-	
+
 	    override fun getMasterRequest() {
 	        imagesAdapter.setObservable(getObservableMasterRequest(CatAPINetwork()))
 	    }
-	
+
 	    private fun getObservableMasterRequest(catAPINetwork: CatAPINetwork): Observable<Cats> {
 	        return catAPINetwork.getExec()
 	    }
@@ -344,12 +346,12 @@ lateinit private var imagesAdapter: ImagesAdapter ， 这一行代码十分有�
 
 fun getMasterRequest() 这个方法发起了网络请求，在启动了 catAPINetwork.getExec() 请求网络数据后 ，  设置Observable绑定到adapter中
 
-## View section
-
+View section
+-------------
 在view包中的class主要负责对UI的管理
 
-#### Layouts
-
+Layouts
+-------------
 在开始实现之前，让我们看看设计图先
 
 ![](http://www.cirorizzo.net/content/images/2016/03/xkittenApp-1.png.pagespeed.ic.ulo4yWl6Cg.png)
@@ -371,7 +373,7 @@ activity_main.xml 将会长成这样
 	    android:layout_height="wrap_content"
 	    tools:context=".view.MainActivity"
 	    android:gravity="center">
-	
+
 	    <android.support.v7.widget.RecyclerView
 	        android:id="@+id/containerRecyclerView"
 	        android:layout_width="wrap_content"
@@ -397,14 +399,14 @@ row_card_view.xml 则是item的布局，它大概长这样：
 	    android:background="@android:color/transparent"
 	    android:layout_centerInParent="true"
 	    android:elevation="4dp">
-	
+
 	    <RelativeLayout
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_centerInParent="true"
 	        android:gravity="center"
 	        android:foregroundGravity="center">
-	
+
 	        <ImageView
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -418,8 +420,8 @@ row_card_view.xml 则是item的布局，它大概长这样：
 
 如你所见item的父布局是一个card_view , 里面是一个 RelativeLayout 包含了一个 ImageView
 
-## Adapter
-
+Adapter
+-------------
 
 现在我们完成了基本的layout，接下来将实现 MainActivity和adapter
 
@@ -442,58 +444,58 @@ unsubscribe() 这个方法被 MainActivity 调用来解除 adapter 和 Observabl
 
 	class ImagesAdapterImpl : RecyclerView.Adapter<ImagesAdapterImpl.ImagesURLsDataHolder>(), ImagesAdapter {
 	    private val TAG = ImagesAdapterImpl::class.java.simpleName
-	
+
 	    private var cats: Cats? = null
 	    private val subscriber: Subscriber<Cats> by lazy { getSubscribe() }
-	
+
 	    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagesURLsDataHolder {
 	        return ImagesURLsDataHolder(
 	                LayoutInflater.from(parent.context).inflate(R.layout.row_card_view, parent, false))
 	    }
-	
+
 	    override fun getItemCount(): Int {
 	        return cats?.data?.images?.size ?: 0
 	    }
-	
+
 	    override fun onBindViewHolder(holder: ImagesURLsDataHolder, position: Int) {
 	        holder.bindImages(cats?.data?.images?.get(position)?.url ?: "")
 	    }
-	
+
 	    private fun setData(cats: Cats?) {
 	        this.cats = cats
 	    }
-	
+
 	    override fun setObservable(observableCats: Observable<Cats>) {
 	        observableCats.subscribe(subscriber)
 	    }
-	
+
 	    override fun unsubscribe() {
 	        if (!subscriber.isUnsubscribed) {
 	            subscriber.unsubscribe()
 	        }
 	    }
-	
+
 	    private fun getSubscribe(): Subscriber<Cats> {
 	        return object : Subscriber<Cats>() {
 	            override fun onCompleted() {
 	                Log.d(TAG, "onCompleted")
 	                notifyDataSetChanged()
 	            }
-	
+
 	            override fun onNext(cats: Cats) {
 	                Log.d(TAG, "onNextNew")
 	                setData(cats)
 	            }
-	
+
 	            override fun onError(e: Throwable) {
 	                //TODO : Handle error here
 	                Log.d(TAG, "" + e.message)
 	            }
 	        }
 	    }
-	
+
 	    class ImagesURLsDataHolder(view: View) : RecyclerView.ViewHolder(view) {
-	
+
 	        fun bindImages(imgURL: String) {
 	            Glide.with(itemView.context).
 	                    load(imgURL).
@@ -517,41 +519,41 @@ Subscriber 和 Observable 概念来自 RxJava,在后面的博客将深入研究
 
 最后，有一段十分有趣的代码，在ImagesURLsDataHolder这个类中，通过Glide library用填充 imgVw_cat ， 通过 API请求传回来的URL将绑定到imageView中被显示出来， bindImages(imgURL: String) 方法中包装了这部分内容， 在同一个类中的方法 onBindViewHolder 中被调用
 
-## Activity
-
+Activity
+-------------
 最后但同样重要的Activity
 
 	class MainActivity : AppCompatActivity() {
 	    private val imagesAdapterImpl: ImagesAdapterImpl by lazy { ImagesAdapterImpl() }
-	
+
 	    private val masterPresenterImpl: MasterPresenterImpl
 	            by lazy {
 	                MasterPresenterImpl()
 	            }
-	
+
 	    override fun onCreate(savedInstanceState: Bundle?) {
 	        super.onCreate(savedInstanceState)
 	        setContentView(R.layout.activity_main)
-	
+
 	        initRecyclerView()
 	        connectingToMasterPresenter()
 	        getURLs()
 	    }
-	
+
 	    override fun onDestroy() {
 	        imagesAdapterImpl.unsubscribe()
 	        super.onDestroy()
 	    }
-	
+
 	    private fun initRecyclerView() {
 	        containerRecyclerView.layoutManager = GridLayoutManager(this, 1)
 	        containerRecyclerView.adapter = imagesAdapterImpl
 	    }
-	
+
 	    private fun connectingToMasterPresenter() {
 	        masterPresenterImpl.connect(imagesAdapterImpl)
 	    }
-	
+
 	    private fun getURLs() {
 	        masterPresenterImpl.getMasterRequest()
 	    }
