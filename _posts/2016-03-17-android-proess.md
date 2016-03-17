@@ -37,17 +37,17 @@ android:process 的坑，你懂吗？
 
 让我们到 Framework 中看看新建进程的逻辑，请打开老罗的博客 ： [Android系统在新进程中启动自定义服务过程（startService）的原理分析](http://blog.csdn.net/luoshengyang/article/details/6677029)
 
-详细介绍了新进程启动的过程，其中我们重点看到 Step 17. ActivityThread.handleCreateService 中
+详细介绍了新进程启动的过程，其中我们重点看到 `Step 17. ActivityThread.handleCreateService` 中
 
 	public final class ActivityThread {  
-      
+
 	    ......  
-	  
+
 	    private final void handleCreateService(CreateServiceData data) {  
 	        // If we are getting ready to gc after going to the background, well  
 	        // we are back active so skip it.  
 	        unscheduleGcIdler();  
-	  
+
 	        LoadedApk packageInfo = getPackageInfoNoCheck(  
 	            data.info.applicationInfo);  
 	        Service service = null;  
@@ -61,13 +61,13 @@ android:process 的坑，你懂吗？
 	                    + ": " + e.toString(), e);  
 	            }  
 	        }  
-	  
+
 	        try {  
 	            if (localLOGV) Slog.v(TAG, "Creating service " + data.info.name);  
-	  
+
 	            ContextImpl context = new ContextImpl();  
 	            context.init(packageInfo, null, this);  
-	  
+
 	            Application app = packageInfo.makeApplication(false, mInstrumentation);  
 	            context.setOuterContext(service);  
 	            service.attach(context, this, data.info.name, data.token, app,  
@@ -80,7 +80,7 @@ android:process 的坑，你懂吗？
 	            } catch (RemoteException e) {  
 	                // nothing to do.  
 	            }  
-	              
+
 	        } catch (Exception e) {  
 	            if (!mInstrumentation.onException(service, e)) {  
 	                throw new RuntimeException(  
@@ -89,9 +89,9 @@ android:process 的坑，你懂吗？
 	            }  
 	        }  
 	    }  
-	  
+
 	    ......  
-  
+
 	}  
 
 看到这行 `Application app = packageInfo.makeApplication(false, mInstrumentation);` 在这里创建了 Application 。
@@ -117,19 +117,19 @@ android:process 的坑，你懂吗？
 在 Application 的 onCreate 中获取进程名称并进行相应的判断，例如：
 
 	String processName = getProcessName(this, android.os.Process.myPid());
-		
+
 	if (!TextUtils.isEmpty(processName) && processName.equals(this.getPackageName())) {//判断进程名，保证只有主进程运行
 		//主进程初始化逻辑
 		....
 	}
 
-###总结
+### 总结
 
-知其然还需知其所以然，这才是总结并提高的法宝。希望能帮到有需要的同学 ：） 
+知其然还需知其所以然，这才是总结并提高的法宝。希望能帮到有需要的同学 ：）
 
 Have a good day ~
 
-###参考
+### 参考
 
 [http://blog.csdn.net/jason0539/article/details/45555671](http://blog.csdn.net/jason0539/article/details/45555671)
 
