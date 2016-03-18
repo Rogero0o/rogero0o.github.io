@@ -8,22 +8,23 @@ header-img: "img/home-bg-o.jpg"
 tags:
     - 翻译
 ---
-**Building a Kotlin project**
-
+Building a Kotlin project
+=============
 
 > * 原文链接 : [Building a Kotlin project](http://www.cirorizzo.net/2016/03/04/building-a-kotlin-project/)
 * 原文作者 : [Ciro Rizzo](http://www.cirorizzo.net/)
 * 译者 : [rogero0o](https://github.com/Rogero0o)
 
 
-**Part 1**
-
+ Part 1
+-------------
 
 学一门新语言最好的方法就是写一个实际的Dem.
 
 所以这个系列的博客将专注于使用 Kotlin 写一个小例子.
 
-**Scenario （要求）**
+Scenario （要求）
+-------------
 
 为了覆盖各种情景,这个DEMO必须要有以下要求：
 
@@ -34,8 +35,8 @@ tags:
 
 ![](http://www.cirorizzo.net/content/images/2016/03/xkittenApp.png.pagespeed.ic.ulo4yWl6Cg.png)
 
-**Dependencies （依赖库）**
-
+Dependencies （依赖库）
+-------------
 这可是个使用一些很腻害的依赖库的好机会，比如说：
 
 - Retrofit2 用来请求网络，访问REST API以及数据的反序列化
@@ -44,7 +45,7 @@ tags:
 - RecyclerView CardView 支持界面显示
 - 整体框架将使用MVP
 
-**Set Up the Project （建立工程）**
+Set Up the Project （建立工程）
 -------------
 使用 Android Studio 来创建新工程将会非常简单
 
