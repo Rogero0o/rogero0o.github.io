@@ -31,7 +31,7 @@ android:process 的坑，你懂吗？
 
 >决定终止哪个进程时，Android 系统将权衡它们对用户的相对重要程度。例如，相对于托管可见 Activity 的进程而言，它更有可能关闭托管屏幕上不再可见的 Activity 进程。 因此，是否终止某个进程的决定取决于该进程中所运行组件的状态。 下面，我们介绍决定终止进程所用的规则。
 
-在需要使用到新进程时，可以使用 android:process 属性，如果被设置的进程名是以一个冒号开头的，则这个新的进程对于这个应用来说是私有的，当它被需要或者这个服务需要在新进程中运行的时候，这个新进程将会被创建。如果这个进程的名字是以小写字符开头的，则这个服务将运行在一个以这个名字命名的全局的进程中，当然前提是它有相应的权限。这将允许在不同应用中的各种组件可以共享一个进程，从而减少资源的占用。具体可以参考博客：[apk，task，android:process与android:sharedUserId的区别](http://blog.csdn.net/lynn0708/article/details/13624403)
+在需要使用到新进程时，可以使用 android:process 属性，如果被设置的进程名是以一个冒号开头的，则这个新的进程对于这个应用来说是私有的，当它被需要或者这个服务需要在新进程中运行的时候，这个新进程将会被创建。如果这个进程的名字是以字符开头，并且符合 android 包名规范(如 com.roger 等)，则这个服务将运行在一个以这个名字命名的全局的进程中，当然前提是它有相应的权限。若以数字开头(如 1Remote.com )，或不符合 android 包名规范（如 Remote），则在编译时将会报错 （ INSTALL_PARSE_FAILED_MANIFEST_MALFORMED ）。新建进程将允许在不同应用中的各种组件可以共享一个进程，从而减少资源的占用。具体可以参考博客：[apk，task，android:process与android:sharedUserId的区别](http://blog.csdn.net/lynn0708/article/details/13624403)
 
 重点来了，因为设置了 android:process 属性将组件运行到另一个进程，相当于另一个应用程序，所以在另一个线程中也将新建一个 Application 的实例。**因此，每新建一个进程   Application 的 onCreate 都将被调用一次。** 如果在 Application 的 onCreate 中有许多初始化工作并且需要根据进程来区分的，那就需要特别注意了。
 
