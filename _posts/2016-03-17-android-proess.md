@@ -100,6 +100,8 @@ android:process 的坑，你懂吗？
 
 获取当前运行进程的名称：
 
+#### 方案1
+
 	public static String getProcessName(Context cxt, int pid) {  
         ActivityManager am = (ActivityManager) cxt.getSystemService(Context.ACTIVITY_SERVICE);  
         List<RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();  
@@ -114,7 +116,24 @@ android:process 的坑，你懂吗？
         return null;  
     }  
 
-在 Application 的 onCreate 中获取进程名称并进行相应的判断，例如：
+目前网上主流的方法，但效率没有方案2高，感谢由王燚同学提供的方案2
+
+#### 方案2
+
+    public static String getProcessName() {
+      try {
+        File file = new File("/proc/" + android.os.Process.myPid() + "/" + "cmdline");
+        BufferedReader mBufferedReader = new BufferedReader(new FileReader(file));
+        String processName = mBufferedReader.readLine().trim();
+        mBufferedReader.close();
+        return processName;
+      } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+      }
+    }
+
+然后在 Application 的 onCreate 中获取进程名称并进行相应的判断，例如：
 
 	String processName = getProcessName(this, android.os.Process.myPid());
 
