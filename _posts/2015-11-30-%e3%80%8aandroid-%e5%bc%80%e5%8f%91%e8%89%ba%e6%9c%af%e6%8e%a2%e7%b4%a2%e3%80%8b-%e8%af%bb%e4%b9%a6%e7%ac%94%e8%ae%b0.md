@@ -6,7 +6,7 @@ date: 2015-11-30T10:47:07+00:00
 author:     "Roger"
 header-img: "img/android-bg8.jpg"
 tags:
-    - 《Android 开发艺术探索》 读书笔记
+    - 读书笔记
 ---
 最近在研读任教主的《Android开发艺术探索》大作，真是一本好书，以下为记录的读书笔记：
 
