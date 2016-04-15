@@ -300,6 +300,6 @@ Android N 中的浮动通知很棒的功能是我们可以自定义 Layouts 来�
 
 ## 最后
 
-我们简单的查阅了一个新的 notifications 在 Android N 中并且学习了怎么实现它，那么现在就把这些应用到你的旧的或是新的应用中去吧！我想这些新功能对于安卓平台来说也是棒棒的，这些 notifications 的新功能不仅强大，而且我还期待在应用中更加强大的 notification 展示。如果你有任何问题，请联系作者的 tweet 或是直接到[原文]((https://medium.com/@hitherejoe/android-n-introducing-upgraded-notifications-d4dd98a7ca92#.u98ejhd43)留言 ：）。
+我们简单的查阅了一个新的 notifications 在 Android N 中并且学习了怎么实现它，那么现在就把这些应用到你的旧的或是新的应用中去吧！我想这些新功能对于安卓平台来说也是棒棒的，这些 notifications 的新功能不仅强大，而且我还期待在应用中更加强大的 notification 展示。如果你有任何问题，请联系作者的 tweet 或是直接到 [原文]((https://medium.com/@hitherejoe/android-n-introducing-upgraded-notifications-d4dd98a7ca92#.u98ejhd43) 留言 ：）。
 
-p.s 别忘了到[原文]((https://medium.com/@hitherejoe/android-n-introducing-upgraded-notifications-d4dd98a7ca92#.u98ejhd43)中点击推荐按钮哦！
+p.s 别忘了到 [原文]((https://medium.com/@hitherejoe/android-n-introducing-upgraded-notifications-d4dd98a7ca92#.u98ejhd43) 中点击推荐按钮哦！
