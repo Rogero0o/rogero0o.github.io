@@ -2,7 +2,7 @@
 layout:     post
 title:      "如何减小 PNG 图片大小"
 subtitle:   "Reducing PNG file Size"
-date: 2016-05-19 14:00:01 +0800
+date: 2016-05-19 12:00:01 +0800
 author:     "Roger"
 header-img: "img/home-bg-o.jpg"
 tags:
