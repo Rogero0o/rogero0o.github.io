@@ -7,6 +7,7 @@ author:     "Roger"
 header-img: "img/home-bg-o.jpg"
 tags:
     - 翻译
+    - Life
 ---
 Do You Take Yourself Seriously?
 ---
