@@ -64,7 +64,7 @@ You spend a lot of time dreaming but not actually doing. You come up with ideas 
 
 你花费大量时间幻想但从来不付出实际行动。你有很多想法但却试都没有去试。
 
-！[image](https://cdn-images-1.medium.com/max/800/1*R55eIeIg2uJ2hYb5U6n0Mw.gif)
+![image](https://cdn-images-1.medium.com/max/800/1*R55eIeIg2uJ2hYb5U6n0Mw.gif)
 
 Or you do try something but you give up quickly because you decide it’s not good enough, no one will like it, and it was a stupid idea anyway.
 
@@ -82,7 +82,7 @@ You’ll eventually see someone else who had the same idea you had, but she shar
 
 你最终会看到一个人和你拥有同样的想法，但是他将这个想法和世界分享，并且做了一些事情。
 
-！[image](https://cdn-images-1.medium.com/max/800/1*2rm7GD0EDzH4fRZZ345TTw.gif)
+![image](https://cdn-images-1.medium.com/max/800/1*2rm7GD0EDzH4fRZZ345TTw.gif)
 
 “But it was the exact same idea!” you say. Yes, it was — but that person took it seriously. That person took themselves seriously. That person said, “this is interesting to me, so it could be interesting to someone else,” and they did something with it.
 
