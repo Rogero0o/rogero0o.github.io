@@ -4,7 +4,7 @@ title:      "你是否认真的对待自己？"
 subtitle:   "Do You Take Yourself Seriously?"
 date: 2016-06-12 20:00:01 +0800
 author:     "Roger"
-header-img: "img/home-bg-o.jpg"
+header-img: "img/post-bg-2015.jpg"
 tags:
     - 翻译
     - Life
