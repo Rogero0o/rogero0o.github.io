@@ -109,4 +109,4 @@ And when I’m not thinking about kids, donuts, or pizza, I do my best programmi
 
 除了工作，我们还有很多角色，爸爸的儿子，妻子的丈夫，女友的爱人等等，请不要让编程夺走你的一切，我们可不是编程机器。
 
-Work is for life .  Work Hard Play Hard . Enjoy your life ~
+Work Hard Play Hard . Work for life . Enjoy your life ~
