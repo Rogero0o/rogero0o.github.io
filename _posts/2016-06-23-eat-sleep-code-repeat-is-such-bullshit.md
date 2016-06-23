@@ -50,13 +50,13 @@ Look, I get it — Google I/O is a developer conference, and the “eat, sle
 
 你看，其实我是了解的 —— 谷歌 2016 大会是一个开发者的盛会，‘吃饭、睡觉、编码、循环反复’ 这个标语其实也是一个聪明的方式（尽管也不是原创）来表达 ‘写代码是很酷的，我想要无时不刻都在编码’，我赞赏这种热情，我十分赞赏。
 
-** But there’s a damaging subtext, and that’s what bothers me. The phrase promotes an unhealthy perspective that programming is an all or nothing endeavor — that to excel at it, you have to go all in. It must be all consuming and the focus of your life. **
+*But there’s a damaging subtext, and that’s what bothers me. The phrase promotes an unhealthy perspective that programming is an all or nothing endeavor — that to excel at it, you have to go all in. It must be all consuming and the focus of your life.*
 
-** 但是这条标语真的是糟透了，它让我烦恼不已。因为这段标语宣扬了一种不健康的理念，即编程是一件要么尽全力要么完全放弃的行为，你必须将所有都投入到编程中，你才能成为其中的顶尖高手。你必须耗尽一生专注的编程才能获得成功。 **
+*但是这条标语真的是糟透了，它让我烦恼不已。因为这段标语宣扬了一种不健康的理念，即编程是一件要么尽全力要么完全放弃的行为，你必须将所有都投入到编程中，你才能成为其中的顶尖高手。你必须耗尽一生专注的编程才能获得成功。 **
 
-** Such bullshit. In fact it’s the exact opposite. **
+*Such bullshit. In fact it’s the exact opposite.*
 
-** 完全是胡说八道。事实上这完全相反。 **
+*完全是胡说八道。事实上这完全相反。*
 
 At Basecamp I work with some of the best programmers in the world. It’s no coincidence that they all have numerous interests and talents far outside of their programming capabilities.
 
