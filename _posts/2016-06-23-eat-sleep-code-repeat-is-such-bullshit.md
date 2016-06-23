@@ -52,7 +52,7 @@ Look, I get it — Google I/O is a developer conference, and the “eat, sle
 
 *But there’s a damaging subtext, and that’s what bothers me. The phrase promotes an unhealthy perspective that programming is an all or nothing endeavor — that to excel at it, you have to go all in. It must be all consuming and the focus of your life.*
 
-*但是这条标语真的是糟透了，它让我烦恼不已。因为这段标语宣扬了一种不健康的理念，即编程是一件要么尽全力要么完全放弃的行为，你必须将所有都投入到编程中，你才能成为其中的顶尖高手。你必须耗尽一生专注的编程才能获得成功。 **
+*但是这条标语真的是糟透了，它让我烦恼不已。因为这段标语宣扬了一种不健康的理念，即编程是一件要么尽全力要么完全放弃的行为，你必须将所有都投入到编程中，你才能成为其中的顶尖高手。你必须耗尽一生专注的编程才能获得成功。*
 
 *Such bullshit. In fact it’s the exact opposite.*
 
