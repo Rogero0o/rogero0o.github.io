@@ -19,7 +19,7 @@ Android OpenGL ES 第一章
 
 本系列所有源码地址：[https://github.com/Rogero0o/OpenGL_Demo](https://github.com/Rogero0o/OpenGL_Demo)
 
-首先新建第一个项目，源码中名为 AirHockey1 ，意思是一个空气曲棍球游戏，这是书中的代码教学用代码示例.
+首先新建第一个项目，源码中名为 FirstOpenGLProject ，这是书中的代码教学用代码示例.(由于第一章过于简单，所以源码中没有本章项目)
 
 ### GLSurfaceView
 
