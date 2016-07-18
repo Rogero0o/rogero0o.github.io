@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "《OpenGL ES 应用开发实践指南》读书笔记"
+title:      "《OpenGL ES 应用开发实践指南》读书笔记 No.1"
 subtitle:   "Android OpenGL ES 从入门到奔溃"
 date: 2016-07-18 11:00:01 +0800
 author:     "Roger"
@@ -17,7 +17,7 @@ Android OpenGL ES 第一章
 
 想造自行车，那么第一步就是先学会怎么把自行车骑了。我们先搭建一个最简单的 OpenGL 实例，然后一步步细化，了解其中的奥秘。
 
-本系列所有源码地址：https://github.com/Rogero0o/OpenGL_Demo
+本系列所有源码地址：[https://github.com/Rogero0o/OpenGL_Demo](https://github.com/Rogero0o/OpenGL_Demo)
 
 首先新建第一个项目，源码中名为 AirHockey1 ，意思是一个空气曲棍球游戏，这是书中的代码教学用代码示例.
 
@@ -133,4 +133,4 @@ Renderer 类是一个渲染器，其中主要实现了 onSurfaceCreated , onSurf
 在使用 OpenGL 的方法时候，可能要在前面加入 *GLES20.* , 为了方便我们可以使用组织导入：
 *import static android.opengl.GLES20*
 
-在完成这些后，就可以将程序运行起来了，你将看到一个完全红色的屏幕。下一章，将学习顶点和着色器。
+怎么样，是不是超简单？在完成这些后，就可以将程序运行起来了，你将看到一个完全红色的屏幕。下一章才真正开始，我们将学习顶点和着色器。
