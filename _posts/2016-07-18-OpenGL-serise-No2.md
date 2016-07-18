@@ -40,7 +40,7 @@ Android OpenGL ES 第二章 - 顶点和着色器
 
 所以我们要将一个正方形切割为两个三角形：
 
-![image](https://github.com/Rogero0o/rogero0o.github.io/blob/master/img/opengl/image2-3?raw=true)
+![image](https://github.com/Rogero0o/rogero0o.github.io/blob/master/img/opengl/image2-3.jpg?raw=true)
 
 因此，需要将 tableVertices改为：
 
@@ -60,7 +60,7 @@ Android OpenGL ES 第二章 - 顶点和着色器
 
 完成这些之后，我们已经在 java 层定义好了顶点，然而这个定义并不能被 OpenGL 直接使用，我们需要将这些数据复制到本地堆：
 
-![image](https://github.com/Rogero0o/rogero0o.github.io/blob/master/img/opengl/image2-4?raw=true)
+![image](https://github.com/Rogero0o/rogero0o.github.io/blob/master/img/opengl/image2-4.jpg?raw=true)
 
 在构造函数的结尾处加入以下代码：
 
