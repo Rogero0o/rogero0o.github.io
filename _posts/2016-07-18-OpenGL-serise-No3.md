@@ -2,7 +2,7 @@
 layout:     post
 title:      "《OpenGL ES 应用开发实践指南》读书笔记 No.3"
 subtitle:   "Android OpenGL ES 从入门到奔溃"
-date: 2016-07-18 11:00:01 +0800
+date: 2016-07-19 11:00:01 +0800
 author:     "Roger"
 header-img: "img/post-bg-2015.jpg"
 tags:
