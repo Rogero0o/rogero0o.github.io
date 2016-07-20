@@ -4,7 +4,7 @@ title:      "《OpenGL ES 应用开发实践指南》读书笔记 No.3"
 subtitle:   "Android OpenGL ES 从入门到奔溃"
 date: 2016-07-19 11:00:01 +0800
 author:     "Roger"
-header-img: "img/post-bg-2015.jpg"
+header-img: "img/opengl-bg.jpg"
 tags:
     - OpenGL ES
 ---
@@ -15,7 +15,7 @@ Android OpenGL ES 第三章 - 编译着色器及在屏幕上绘图
 
 请大家务必对照源码阅读本文，否则有如盲人摸象。
 
-上一章我们学习了顶点和着色器的基本知识，现在我们看看如何编译着色器
+上一章我们学习了顶点和着色器的基本知识，现在我们看看如何编译着色器，本项目源码还是 AirHockey1 。
 
 ### 加载、编译着色器
 
