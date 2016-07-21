@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "《OpenGL ES 应用开发实践指南》读书笔记 No.4"
+title:      "《OpenGL ES 应用开发实践指南》读书笔记 No.5"
 subtitle:   "Android OpenGL ES 从入门到奔溃"
 date: 2016-07-20 11:00:01 +0800
 author:     "Roger"
@@ -8,7 +8,7 @@ header-img: "img/opengl-bg.jpg"
 tags:
     - OpenGL ES
 ---
-Android OpenGL ES 第四章 - 增加颜色和着色
+Android OpenGL ES 第五章 - 调整屏幕宽高比
 ---
 
 本系列所有源码地址：[https://github.com/Rogero0o/OpenGL_Demo](https://github.com/Rogero0o/OpenGL_Demo)
