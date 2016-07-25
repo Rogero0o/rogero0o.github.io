@@ -1,0 +1,238 @@
+ ---
+layout:     post
+title:      "《OpenGL ES 应用开发实践指南》读书笔记 No.8"
+subtitle:   "Android OpenGL ES 从入门到奔溃"
+date: 2016-07-22 11:00:01 +0800
+author:     "Roger"
+header-img: "img/opengl-bg.jpg"
+tags:
+    - OpenGL ES
+---
+Android OpenGL ES 第八章 - 构建简单物体
+---
+
+本系列所有源码地址：[https://github.com/Rogero0o/OpenGL_Demo](https://github.com/Rogero0o/OpenGL_Demo)
+
+请大家务必对照源码阅读本文，否则有如盲人摸象。
+
+上一章我们学习了如何使用纹理，这一章我们将学习如何使用三角形构建物体。这一章的项目名为 AirHockeyWithBetterMallets 。
+
+### 合并三角形带和三角形扇
+
+关于 OpenGL 中的三角形带和三角形扇，或许你需要一个链接来了解一下基础知识：[Link](http://book.2cto.com/201412/48540.html) .
+
+在本章中我们要使用三角形带和三角形扇来绘制一个冰球和木槌。其实就如同使用纸张来黏贴他们一样：首先，我们需要一个圆形作为顶，然后需要一个长方形卷成一个圆柱作为边。将两者粘合在一起就做成了冰球。在冰球的基础上添加一个比较高而直径比较小的圆柱，木槌就做好了。
+
+接下来我们将添加几个几何图形的类，他们都在 util 包中的 *Geometry* 类中，分别有 *Point* , *Circle* , *Cylinder* 分别代表点，圆和圆柱体。接下来在 objects 包中有一个 *ObjectBuilder* 类用于创建物体，让我们看到其中的几个主要方法，第一个是创建冰球：
+
+    static GeneratedData createPuck(Cylinder puck, int numPoints) {
+        int size = sizeOfCircleInVertices(numPoints)
+                 + sizeOfOpenCylinderInVertices(numPoints);
+
+        ObjectBuilder builder = new ObjectBuilder(size);
+
+        Circle puckTop = new Circle(
+            puck.center.translateY(puck.height / 2f),
+            puck.radius);
+
+        builder.appendCircle(puckTop, numPoints);
+        builder.appendOpenCylinder(puck, numPoints);
+
+        return builder.build();
+    }
+
+首先计算创建一个冰球需要几个点，用 *size* 传给 *ObjectBuilder* ，在 *ObjectBuilder* 中即初始化相应大小的内存。在生成了冰球的顶部后，我们计算冰球的顶部应该放在哪里，并调用 *appendCircle()* 创建它。通过调用 *appendOpenCylinder* 我们也生成了冰球的侧面，之后通过返回 *build()* 的结果返回数据。
+
+*appendCircle* 的主要代码如下：
+
+    private void appendCircle(Circle circle, int numPoints) {
+        final int startVertex = offset / FLOATS_PER_VERTEX;
+        final int numVertices = sizeOfCircleInVertices(numPoints);
+
+        // Center point of fan
+        vertexData[offset++] = circle.center.x;
+        vertexData[offset++] = circle.center.y;
+        vertexData[offset++] = circle.center.z;
+
+        // Fan around center point. <= is used because we want to generate
+        // the point at the starting angle twice to complete the fan.
+        for (int i = 0; i <= numPoints; i++) {
+            float angleInRadians =
+                  ((float) i / (float) numPoints)
+                * ((float) Math.PI * 2f);
+
+            vertexData[offset++] =
+                  circle.center.x
+                + circle.radius * FloatMath.cos(angleInRadians);
+            vertexData[offset++] = circle.center.y;
+            vertexData[offset++] =
+                  circle.center.z
+                + circle.radius * FloatMath.sin(angleInRadians);            
+        }
+        drawList.add(new DrawCommand() {
+            @Override
+            public void draw() {
+                glDrawArrays(GL_TRIANGLE_FAN, startVertex, numVertices);
+            }
+        });
+    }
+
+要构建三角形扇，我们首先在 *circle.center* 定义一个圆心顶点，接着我们围绕圆心的点按扇形展开，并把第一个点绕圆周重复两次考虑在内。为了生成一个园周边的点，我们首先需要一个循环，它的范围涵盖从 0 到 360 度的整个圆，或者 0 到 2π 弧度。我们需要找到圆周上的一个点的 x 的位置，我们要调用 *cos(angle)* ，要找到它的 z 的位置，我们调用 *sin(angle)* , 我们用圆的半径缩放这两个位置。因为这个圆将被平放到在 x-z 平面上，单位圆的 y 分量就会映射到 y 的位置上。
+
+后面将 *glDrawArrays(GL_TRIANGLE_FAN, startVertex, numVertices);* 加入绘制命令队列中。
+
+接下来是 *appendOpenCylinder()* :
+
+    private void appendOpenCylinder(Cylinder cylinder, int numPoints) {
+        final int startVertex = offset / FLOATS_PER_VERTEX;
+        final int numVertices = sizeOfOpenCylinderInVertices(numPoints);
+        final float yStart = cylinder.center.y - (cylinder.height / 2f);
+        final float yEnd = cylinder.center.y + (cylinder.height / 2f);
+
+        // Generate strip around center point. <= is used because we want to
+        // generate the points at the starting angle twice, to complete the
+        // strip.
+        for (int i = 0; i <= numPoints; i++) {
+            float angleInRadians =
+                  ((float) i / (float) numPoints)
+                * ((float) Math.PI * 2f);
+
+            float xPosition =
+                  cylinder.center.x
+                + cylinder.radius * FloatMath.cos(angleInRadians);
+
+            float zPosition =
+                  cylinder.center.z
+                + cylinder.radius * FloatMath.sin(angleInRadians);
+
+            vertexData[offset++] = xPosition;
+            vertexData[offset++] = yStart;
+            vertexData[offset++] = zPosition;
+
+            vertexData[offset++] = xPosition;
+            vertexData[offset++] = yEnd;
+            vertexData[offset++] = zPosition;
+        }
+        drawList.add(new DrawCommand() {
+            @Override
+            public void draw() {
+                glDrawArrays(GL_TRIANGLE_STRIP, startVertex, numVertices);
+            }
+        });        
+    }
+
+我们使用了同前面生成圆周顶点一样的算法，只是这次我们为圆周上的每个点生成了两个顶点。一个是圆柱顶部，另一个是圆柱底部。前面两个点的位置重复两次以使这个圆柱体闭合。使用 *glDrawArrays(GL_TRIANGLE_STRIP, startVertex, numVertices);* 告诉 OpenGL 绘制一个三角形带。
+
+现在我们就可以用两个圆柱体来构成一个木槌，具体请参见 *createMallet* 这个方法。
+
+接下来的工作是更新一些物体类，具体请参见 *Puck* 以及 *Mallet* 类。这里就不赘述了，下一步是更新着色器，我们用每个顶点的位置而不是每个顶点的颜色定义了球和木槌，因此我们不得不把颜色作为一个 uniform 传递进去。在 *ShaderProgram.java* 中定义一个新的常量 *U_COLOR* 。然后加入定义：
+
+    private final int uColorLocation;
+
+    public ColorShaderProgram(Context context) {
+        ...
+        uColorLocation = glGetUniformLocation(program, U_COLOR);
+        ...
+    }
+
+    public void setUniforms(float[] matrix, float r, float g, float b) {
+        glUniformMatrix4fv(uMatrixLocation, 1, false, matrix, 0);
+        glUniform4f(uColorLocation, r, g, b, 1f);
+    }
+
+我们还需要更新着色器，以便接受传递进来的参数：
+
+*simple_vertex_shader.glsl*：
+
+    uniform mat4 u_Matrix;
+    attribute vec4 a_Position;  
+    void main()                    
+    {                                	  	  
+        gl_Position = u_Matrix * a_Position;            
+    }    
+
+*simple_fragment_shader.glsl*：
+
+    precision mediump float;
+
+    uniform vec4 u_Color;      	   								
+
+    void main()                    		
+    {                              	
+        gl_FragColor = u_Color;                                  		
+    }
+
+接下来是初始化新矩阵以及更新 *onDrawFrame* 方法：
+
+    @Override
+    public void onSurfaceChanged(GL10 glUnused, int width, int height) {
+        // Set the OpenGL viewport to fill the entire surface.
+        glViewport(0, 0, width, height);
+        MatrixHelper.perspectiveM(projectionMatrix, 45, (float) width
+            / (float) height, 1f, 10f);
+        setLookAtM(viewMatrix, 0, 0f, 1.2f, 2.2f, 0f, 0f, 0f, 0f, 1f, 0f);
+    }
+
+前两个方法在前面已经介绍过了，让我们看到这个 *setLookAtM* 方法，调用这个方法时，把眼睛设为(0,1.2,2.2)，这意味着眼睛的位置在 x-z 平面上方的1.2个单位，并向后2.2个单位。换句话说，场景中的所有东西都出现在你下面 1.2 个单位和你前面 2.2 个单位的地方。把中心设为（0,0,0），以为这你将向下看你前面的原点，并把指向设为（0,1,0），以为着你的头是笔直向上的。
+
+最后，让我们更新一下 *onDrawFrame* 作如下更改：
+
+    @Override
+    public void onDrawFrame(GL10 glUnused) {
+       // Clear the rendering surface.
+       glClear(GL_COLOR_BUFFER_BIT);
+
+       // Multiply the view and projection matrices together.
+       multiplyMM(viewProjectionMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
+
+       // Draw the table.
+       positionTableInScene();
+       textureProgram.useProgram();
+       textureProgram.setUniforms(modelViewProjectionMatrix, texture);
+       table.bindData(textureProgram);
+       table.draw();
+
+       // Draw the mallets.
+       positionObjectInScene(0f, mallet.height / 2f, -0.4f);
+       colorProgram.useProgram();
+       colorProgram.setUniforms(modelViewProjectionMatrix, 1f, 0f, 0f);
+       mallet.bindData(colorProgram);
+       mallet.draw();
+
+       positionObjectInScene(0f, mallet.height / 2f, 0.4f);
+       colorProgram.setUniforms(modelViewProjectionMatrix, 0f, 0f, 1f);
+       // Note that we don't have to define the object data twice -- we just
+       // draw the same mallet again but in a different position and with a
+       // different color.
+       mallet.draw();
+
+       // Draw the puck.
+       positionObjectInScene(0f, puck.height / 2f, 0f);
+       colorProgram.setUniforms(modelViewProjectionMatrix, 0.8f, 0.8f, 1f);
+       puck.bindData(colorProgram);
+       puck.draw();
+    }
+
+这段代码大部分与上一章相同，但是有一些关键的区别，第一点是我们在绘制那些物体之前调用了 *positionTableInScene* 和 *positionObjectInScene*。让我们看看这两个方法：
+
+    private void positionTableInScene() {
+        // The table is defined in terms of X & Y coordinates, so we rotate it
+        // 90 degrees to lie flat on the XZ plane.
+        setIdentityM(modelMatrix, 0);
+        rotateM(modelMatrix, 0, -90f, 1f, 0f, 0f);
+        multiplyMM(modelViewProjectionMatrix, 0, viewProjectionMatrix,
+            0, modelMatrix, 0);
+    }
+
+    private void positionObjectInScene(float x, float y, float z) {
+        setIdentityM(modelMatrix, 0);
+        translateM(modelMatrix, 0, x, y, z);
+        multiplyMM(modelViewProjectionMatrix, 0, viewProjectionMatrix,
+            0, modelMatrix, 0);
+    }
+
+在 *positionTableInScene* 中，由于这个桌子是以 x y 坐标定义的，因此要使它平放到地面上，我们需要让它绕 x 轴向后旋转90度。最后通过把 *viewProjectionMatrix* 和 *modelMatrix* 相乘将所有的矩阵都合并到一起，通过 *modelViewProjectionMatrix* 并传输给着色器程序。 *positionObjectInScene* 也是如此。
+
+我们已经完成了所有的步骤，现在可以大胆放心的将程序运行起来，如果一切顺利你将看到两个木槌的画面。
+
+这一章我们学习了如何使用三角形扇和三角形带来绘制物体，下一章我们将学习如何增加触控反应，完成游戏的交互动作。
