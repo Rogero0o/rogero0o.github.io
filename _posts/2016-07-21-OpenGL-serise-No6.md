@@ -124,3 +124,21 @@ Android OpenGL ES 第六章 - 进入三维世界
 把桌子绕着 x 轴旋转了 -60 度，完成最后的工作，现在这个桌子看起来就像一个三维的物体了。
 
 这一章我们主要学习了如何用矩阵移动和旋转物体，对于这其中的矩阵原理和理论，我们暂时不需要深入的理解，只需要他们的功能即可。下一章我们将学习用纹理增加细节。
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.1](http://www.rogerblog.cn/2016/07/18/OpenGL-serise-No1/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.2](http://www.rogerblog.cn/2016/07/18/OpenGL-serise-No2/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.3](http://www.rogerblog.cn/2016/07/19/OpenGL-serise-No3/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.4](http://www.rogerblog.cn/2016/07/20/OpenGL-serise-No4/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.5](http://www.rogerblog.cn/2016/07/20/OpenGL-serise-No5/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.6](http://www.rogerblog.cn/2016/07/21/OpenGL-serise-No6/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.7](http://www.rogerblog.cn/2016/07/22/OpenGL-serise-No7/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.8](http://www.rogerblog.cn/2016/07/24/OpenGL-serise-No8/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.9](http://www.rogerblog.cn/2016/07/26/OpenGL-serise-No9/)

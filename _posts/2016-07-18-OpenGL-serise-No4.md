@@ -123,3 +123,21 @@ Android OpenGL ES 第四章 - 增加颜色和着色
 接下来我们需要更新 onDrawFrame() ，删除 glUniform4f() 调用，因为我们不需要他们了。既然我们将顶点数据和 a_Color 关联起来了，只需要调用 glDrawArrays() 即可，OpenGL 会自动从顶点数据中读入颜色属性。完成这些后，运行程序，你将得到一个中间明亮周围暗淡的桌面了。
 
 这一章我们主要学习了给每个顶点增加颜色，方法是给顶点数据和顶点着色器增加了一个新的属性，并且告诉 OpenGL 如何使用跨距读入属性。下一章我们将学习如何处理横竖屏的问题。
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.1](http://www.rogerblog.cn/2016/07/18/OpenGL-serise-No1/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.2](http://www.rogerblog.cn/2016/07/18/OpenGL-serise-No2/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.3](http://www.rogerblog.cn/2016/07/19/OpenGL-serise-No3/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.4](http://www.rogerblog.cn/2016/07/20/OpenGL-serise-No4/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.5](http://www.rogerblog.cn/2016/07/20/OpenGL-serise-No5/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.6](http://www.rogerblog.cn/2016/07/21/OpenGL-serise-No6/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.7](http://www.rogerblog.cn/2016/07/22/OpenGL-serise-No7/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.8](http://www.rogerblog.cn/2016/07/24/OpenGL-serise-No8/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.9](http://www.rogerblog.cn/2016/07/26/OpenGL-serise-No9/)

@@ -464,4 +464,22 @@ Android OpenGL ES 第九章 - 增加触控反馈，与空气曲棍球游戏交�
 
 至此，我们已经完成了这本书大部分的内容，后边部分为粒子系统、天空盒、地形、灯光和 Android 的动态壁纸，有兴趣的同学可以购买本书进行学习。
 
-希望通过这 9 片博文，能让大家初步了解 OpenGL 。如果有问题或疑问，请留言。 Thanks : ) 。 
+希望通过这 9 片博文，能让大家初步了解 OpenGL 。如果有问题或疑问，请留言。 Thanks : ) 。
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.1](http://www.rogerblog.cn/2016/07/18/OpenGL-serise-No1/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.2](http://www.rogerblog.cn/2016/07/18/OpenGL-serise-No2/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.3](http://www.rogerblog.cn/2016/07/19/OpenGL-serise-No3/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.4](http://www.rogerblog.cn/2016/07/20/OpenGL-serise-No4/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.5](http://www.rogerblog.cn/2016/07/20/OpenGL-serise-No5/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.6](http://www.rogerblog.cn/2016/07/21/OpenGL-serise-No6/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.7](http://www.rogerblog.cn/2016/07/22/OpenGL-serise-No7/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.8](http://www.rogerblog.cn/2016/07/24/OpenGL-serise-No8/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.9](http://www.rogerblog.cn/2016/07/26/OpenGL-serise-No9/)

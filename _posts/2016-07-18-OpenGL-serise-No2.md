@@ -118,3 +118,21 @@ Android OpenGL ES 第二章 - 顶点和着色器
 *precision* 是默认精度修饰符，具体可参考 [Link](http://blog.csdn.net/hgl868/article/details/7846269) 4.5.3 中的内容。 mediump 表示使用中等精度的值，就像java中选择是使用 float 还是 double 类似。 *uniform* 在 [Link](http://blog.csdn.net/renai2008/article/details/7844495) 中有解释，在片段着色器中，我们需要对 *gl_FragColor* 进行赋值， OpenGL 会使用这个颜色作为当前片段的最终颜色。
 
 这章我们学习了顶点和着色器，这些都是 OpenGL 中的重点难点，后边课程中都是基于顶点和着色器的扩展和细化，所以一些基础知识还是需要反复记忆巩固的。下一章我们将学习如何编译着色器以及在屏幕上显示。
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.1](http://www.rogerblog.cn/2016/07/18/OpenGL-serise-No1/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.2](http://www.rogerblog.cn/2016/07/18/OpenGL-serise-No2/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.3](http://www.rogerblog.cn/2016/07/19/OpenGL-serise-No3/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.4](http://www.rogerblog.cn/2016/07/20/OpenGL-serise-No4/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.5](http://www.rogerblog.cn/2016/07/20/OpenGL-serise-No5/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.6](http://www.rogerblog.cn/2016/07/21/OpenGL-serise-No6/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.7](http://www.rogerblog.cn/2016/07/22/OpenGL-serise-No7/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.8](http://www.rogerblog.cn/2016/07/24/OpenGL-serise-No8/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.9](http://www.rogerblog.cn/2016/07/26/OpenGL-serise-No9/)

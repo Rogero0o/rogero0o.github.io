@@ -200,3 +200,22 @@ OpenGL 中的纹理可以用来表示图像、照片、甚至由一个数学算�
 完成这些后，我们就能用纹理来装饰那个桌子了。复习一下这一章，我们调整纹理来适应它们将要被绘制的形状，既可以通过调整纹理坐标，也可以通过拉伸或是压缩纹理本身来实现。纹理不会被直接绘制，它们要被绑定到纹理单元，然后把这些纹理单元传递给着色器。通过在纹理单元中把纹理切来切去，我们还可以在场景中绘制不同的纹理，但是过分的切换可能使性能下降。我们也可以同时使用多个纹理单元绘制几个纹理。
 
 下一章我们将学习如何构建简单的物体。
+
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.1](http://www.rogerblog.cn/2016/07/18/OpenGL-serise-No1/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.2](http://www.rogerblog.cn/2016/07/18/OpenGL-serise-No2/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.3](http://www.rogerblog.cn/2016/07/19/OpenGL-serise-No3/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.4](http://www.rogerblog.cn/2016/07/20/OpenGL-serise-No4/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.5](http://www.rogerblog.cn/2016/07/20/OpenGL-serise-No5/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.6](http://www.rogerblog.cn/2016/07/21/OpenGL-serise-No6/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.7](http://www.rogerblog.cn/2016/07/22/OpenGL-serise-No7/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.8](http://www.rogerblog.cn/2016/07/24/OpenGL-serise-No8/)
+
+[《OpenGL ES 应用开发实践指南》读书笔记 No.9](http://www.rogerblog.cn/2016/07/26/OpenGL-serise-No9/)
