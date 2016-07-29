@@ -27,7 +27,7 @@ Android OpenGL ES 第九章 - 增加触控反馈，与空气曲棍球游戏交�
            // ...
            glSurfaceView.setRenderer(airHockeyRenderer);
 
-下一步就可以开始写触控处理程序了，在调用 *setContentView()* 之前加入如下代码：
+下一步就可以开始写触控逻辑了，在调用 *setContentView()* 之前加入如下代码：
 
     glSurfaceView.setOnTouchListener(new OnTouchListener() {
                 @Override
