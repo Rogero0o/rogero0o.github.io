@@ -4,7 +4,7 @@ title:      "《代码整洁之道》读书笔记"
 subtitle:   "如何写出更好的代码"
 date: 2016-08-11 11:00:01 +0800
 author:     "Roger"
-header-img: "img/opengl-bg.jpg"
+header-img: "img/code-bg.jpg"
 tags:
     - 读书笔记
 ---
