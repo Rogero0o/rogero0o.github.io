@@ -16,8 +16,6 @@ tags:
 
 在Android系统的Binder机制中，由一系统组件组成，分别是Client、Server、Service Manager和Binder驱动程序，其中Client、Server和Service Manager运行在用户空间，Binder驱动程序运行内核空间。Binder就是一种把这四个组件粘合在一起的粘结剂了，其中，核心组件便是Binder驱动程序了，Service Manager提供了辅助管理的功能，Client和Server正是在Binder驱动和Service Manager提供的基础设施上，进行Client-Server之间的通信。
 
-[<img src="http://2.rogerbolg.sinaapp.com/wp-content/uploads/2015/09/binder-300x185.png" alt="binder" width="500" height="250" class="alignnone size-medium wp-image-150" />](http://2.rogerbolg.sinaapp.com/wp-content/uploads/2015/09/binder.png)
-
 从具体作用上来说：
 
 服务器端接口：实际上是Binder类的对象，该对象一旦创建，内部则会启动一个隐藏线程，会接收Binder驱动发送的消息，收到消息后，会执行Binder对象中的onTransact()函数，并按照该函数的参数执行不同的服务器端代码。
