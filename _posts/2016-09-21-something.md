@@ -4,7 +4,7 @@ title:      "Something about life"
 subtitle:   "无病呻吟系列"
 date: 2016-09-21 11:00:01 +0800
 author:     "Roger"
-header-img: "img/code-bg.jpg"
+header-img: "img/home-bg-o.jpg"
 tags:
     - Life
 ---
