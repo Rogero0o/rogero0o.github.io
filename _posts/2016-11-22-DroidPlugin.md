@@ -17,45 +17,44 @@ Android 插件化框架 *DroidPlugin* 学习笔记
 
 首先学习一下 *DroidPlugin* 的基本原理，使用代理模式进行 *API Hook* 进而达到在 *Framework* 中近乎于随心所欲的添加可运行代码。代理模式基本类似于以下实现：
 
-    interface RentRoom {
-        public void rent();
-    }
+      interface RentRoom {
+          public void rent();
+      }
 
 
-    class People implements RentRoom {
+      class People implements RentRoom {
 
-        @Override
-        public void rent() {
-          // TODO Auto-generated method stub
-          System.out.println("我是个人，我要租房");
-        }
+          @Override
+          public void rent() {
+            // TODO Auto-generated method stub
+            System.out.println("我是个人，我要租房");
+          }
 
-    }
+      }
 
-    class ProxyRent implements RentRoom {
+      class ProxyRent implements RentRoom {
 
-  		  private People mPeople;
+    		  private People mPeople;
 
+      		public ProxyRent(People mPeople) {
+        			super();
+        			this.mPeople = mPeople;
+      		}
 
-    		public ProxyRent(People mPeople) {
-      			super();
-      			this.mPeople = mPeople;
-    		}
+      		@Override
+      		public void rent() {
+        			// TODO Auto-generated method stub
+        			System.out.println("我是中介，我在people租房前运行");
+        			mPeople.rent();
+        			System.out.println("我是中介，我在people租房后运行");
+      		}
+    	}    
 
-    		@Override
-    		public void rent() {
-      			// TODO Auto-generated method stub
-      			System.out.println("我是中介，我在people租房前运行");
-      			mPeople.rent();
-      			System.out.println("我是中介，我在people租房后运行");
-    		}
-  	}    
-
-    public static void main(String[] args) {
-    		People mPeople = new People();
-    		ProxyRent mProxyRent = new ProxyRent(mPeople);
-    		mProxyRent.rent();
-  	}
+      public static void main(String[] args) {
+      		People mPeople = new People();
+      		ProxyRent mProxyRent = new ProxyRent(mPeople);
+      		mProxyRent.rent();
+    	}
 
 我们有一个 *RentRoom* 接口，里面有一个 *rent()* 方法表示租房子，有一个 *People* 类，说明了人有租房的需要，当然我们可以亲自去租房，那么直接调用 *mPeople* 的 *rent()* 方法，但是我们可能有别的事情要忙，于是就有了 *ProxyRent* 这个租房的中介，于是我们只要将 *People* 介绍给中介类，直接让中介去租房就可以了，但是这时候，中介在租房的时候就可以做一些事情，如上面例子中就是打印了一些日志，当然还可以做更多的事情，比如我们只需要建立一个代理类，将系统源码里的变量通过反射替换成我们创建的代理类，那么我们即可以在代理类中实现自己的逻辑，比如启动我们自己的 *activity* 等等，这就是 *DroidPlugin* 的 *API Hook* 的最基本的原理，下面还是使用原文博客中的例子 *Hook* 掉 *startActivity* 方法，使得每次调用的时候都打印一条日志。
 
@@ -131,21 +130,21 @@ Android 插件化框架 *DroidPlugin* 学习笔记
 
     public static void attachContext() throws Exception {
 
-        // 先获取到当前的ActivityThread对象
+        //先获取到当前的ActivityThread对象
         Class<?> activityThreadClass = Class.forName("android.app.ActivityThread");
         Method currentActivityThreadMethod = activityThreadClass.getDeclaredMethod("currentActivityThread");
         currentActivityThreadMethod.setAccessible(true);
         Object currentActivityThread = currentActivityThreadMethod.invoke(null);
 
-        // 拿到原始的 mInstrumentation字段
+        //拿到原始的 mInstrumentation字段
         Field mInstrumentationField = activityThreadClass.getDeclaredField("mInstrumentation");
         mInstrumentationField.setAccessible(true);
         Instrumentation mInstrumentation = (Instrumentation) mInstrumentationField.get(currentActivityThread);
 
-        // 创建代理对象
+        //创建代理对象
         Instrumentation evilInstrumentation = new EvilInstrumentation(mInstrumentation);
 
-        // 偷梁换柱
+        //偷梁换柱
         mInstrumentationField.set(currentActivityThread, evilInstrumentation);
     }
 
