@@ -32,9 +32,10 @@ Android 插件化框架 *DroidPlugin* 学习笔记
 
     }
 
-    class ProxyRent implements RentRoom{
+    class ProxyRent implements RentRoom {
 
   		  private People mPeople;
+
 
     		public ProxyRent(People mPeople) {
       			super();
@@ -128,7 +129,8 @@ Android 插件化框架 *DroidPlugin* 学习笔记
 
 我们看到 *EvilInstrumentation* 这个类继承了 *Instrumentation* ，并且重写了 *execStartActivity* 这个方法，打印了我们需要的日志，并且调用了原变量的 *execStartActivity* 方法，保证原功能的正常运行，下一步将 *currentActivityThread* 中的变量 *mInstrumentation* 替换掉即可：
 
-    public static void attachContext() throws Exception{
+    public static void attachContext() throws Exception {
+
         // 先获取到当前的ActivityThread对象
         Class<?> activityThreadClass = Class.forName("android.app.ActivityThread");
         Method currentActivityThreadMethod = activityThreadClass.getDeclaredMethod("currentActivityThread");
@@ -147,4 +149,4 @@ Android 插件化框架 *DroidPlugin* 学习笔记
         mInstrumentationField.set(currentActivityThread, evilInstrumentation);
     }
 
-通过反射，我们将原来的变量 *Hook* 成了我们的改造过的代理类，于是在代理类中即可以添加我们的代码来实现需要的功能需求~Woo，简直是打开了新世界！感谢原作者的分享 ：[Link](http://weishu.me/2016/01/28/understand-plugin-framework-overview/) 
+通过反射，我们将原来的变量 *Hook* 成了我们的改造过的代理类，于是在代理类中即可以添加我们的代码来实现需要的功能需求~Woo，简直是打开了新世界！感谢原作者的分享 ：[Link](http://weishu.me/2016/01/28/understand-plugin-framework-overview/)
