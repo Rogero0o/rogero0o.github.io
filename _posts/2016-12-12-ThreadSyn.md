@@ -13,7 +13,7 @@ tags:
 
 多线程同步作为基础还是很重要的，在面试中基本作为必备问题，然而在平时的 Android 开发中使用的频率却不是很高，因为一个 *synchronized* 关键字即可帮我们解决绝大部分情况，但是如果在面试中仅仅回答 *synchronized* 就略显单薄了，这里记录一下关于多线程同步的一些点。
 
-1. *synchronized* 最强大最方便的线程同步方法
+1.*synchronized* 最强大最方便的线程同步方法
 
   *synchronized* 具有 **原子性** 以及 **可见性** ：
 
@@ -33,7 +33,7 @@ tags:
 
   在同步控制方法或同步控制块中可以调用 *wait()* 和 *notifyAll()* 来实现控制多线程同步的问题。例如生产者消费者问题等。
 
-2. 使用特殊域变量(*volatile*)实现线程同步
+2.使用特殊域变量(*volatile*)实现线程同步
 
   *volatile* 具有可见性而不具有原子性。所以不能使用该关键字实现程序计数器。
 
@@ -45,7 +45,7 @@ tags:
 
   这里插一个知识点，在使用双重锁定的单例模式时，单例变量 *mInstance* 必须申明为 *volatile* 变量，这是因为 java 平台内存模型是无序写入的，一个类在 new 的过程中可能会返回一个没有充分初始化的引用，这个引用如果恰好被其他线程通过 getInstance 获取就会出现问题，所以将 *mInstance* 申明为 *volatile* ，使得获取的引用都是最后充分初始化后的类，才能保证线程安全问题。
 
-3. 使用 *Lock* 实现同步
+3.使用 *Lock* 实现同步
 
   *Lock* 是一种比 *synchronized* 更强大的锁的方式。
 
@@ -59,11 +59,11 @@ tags:
 
   *Lock* 与 *Condition* 的配合使用，Condition 可以替代传统的线程间通信，用 await() 替换 wait() ，用 signal() 替换 notify() ，用 signalAll() 替换 notifyAll()。Condition 的强大之处在于它可以为多个线程间建立不同的 Condition 。具体代码可参考 [Link](http://blog.csdn.net/vking_wang/article/details/9952063)
 
-4. 使用 *ThreadLocal*
+4.使用 *ThreadLocal*
 
   如果使用 *ThreadLocal* 管理变量，则每一个使用该变量的线程都获得该变量的副本，副本之间相互独立，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响。例如 *Android* 中著名的 *Looper* 就是一个线程的局部变量。关于 *ThreadLocal* 的工作原理请参考 [Link](http://blog.csdn.net/imzoer/article/details/8262101)
 
-5. 线程安全的一些集合
+5.线程安全的一些集合
 
   JDK 1.2 中引入的 *Collection* 框架是一种表示对象集合的高度灵活的框架，它使用基本接口 *List*、*Set* 和 *Map*。通过 JDK 提供每个集合的多次实现（*HashMap*、*Hashtable*、*TreeMap*、*WeakHashMap*、*HashSet*、*TreeSet*、*Vector*、*ArrayList*、*LinkedList* 等等）。其中一些集合已经是线程安全的（ *Hashtable* 和 *Vector* ），通过同步的封装工厂（ *Collections.synchronizedMap()*、*synchronizedList()* 和 *synchronizedSet()*），其余的集合均可表现为线程安全的。
 
@@ -73,7 +73,7 @@ tags:
 
   JDK 5.0 还提供了两个新集合接口 --*Queue* 和 *BlockingQueue*。Queue 接口与 List 类似，但它只允许从后面插入，从前面删除。通过消除 List 的随机访问要求，可以创建比现有 ArrayList 和 LinkedList 实现性能更好的 Queue 实现。因为 List 的许多应用程序实际上不需要随机访问，所以Queue 通常可以替代 List，来获得更好的性能。
 
-6. 生产者消费者模式的五种写法
+6.生产者消费者模式的五种写法
 
   [Link](http://huachao1001.github.io/article.html?QhSkxKKX)
 
