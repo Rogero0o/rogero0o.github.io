@@ -11,13 +11,13 @@ tags:
 
 很多时候我们自己写了库，需要放到jcenter中以便快速的提供他人使用，以下记录了一些我在发布中遇到的问题，主要参考以下页面进行配置：
 
-<a title="Rocko的博客" href="http://rocko.xyz/2015/02/02/%e4%bd%bf%e7%94%a8Gradle%e5%8f%91%e5%b8%83%e9%a1%b9%e7%9b%ae%e5%88%b0JCenter%e4%bb%93%e5%ba%93/" target="_blank">Rocko的博客</a>
+[Rocko的博客](http://rocko.xyz/2015/02/02/%e4%bd%bf%e7%94%a8Gradle%e5%8f%91%e5%b8%83%e9%a1%b9%e7%9b%ae%e5%88%b0JCenter%e4%bb%93%e5%ba%93/)
 
 下面是原文和我在操作时遇到的问题：
 
  **申请Bintray账号(需要翻墙,如何翻请自行度娘~)**
 
-Bintray的基本功能类似于Maven Central，一样的我们需要一个账号，<a title="传送门" href="https://bintray.com/" target="_blank">Bintray传送门</a>，注册完成后第一步算完成了。
+Bintray的基本功能类似于Maven Central，一样的我们需要一个账号，[传送门](https://bintray.com/)，注册完成后第一步算完成了。
 
 生成项目的JavaDoc和source JARs
 
@@ -138,6 +138,7 @@ Bintray的基本功能类似于Maven Central，一样的我们需要一个账号
 	        publish = true
 	    }
 	}
+
 配置好上述后需要在你的项目的根目录上的local.properties文件里（一般这文件需gitignore，防止泄露账户信息）配置你的bintray账号信息，your\_user\_name为你的用户名，your_apikey为你的账户的apikey，可以点击进入你的账户信息里再点击Edit即有查看API Key的选项，把他复制下来。
 
 	bintray.user=your_user_name
@@ -147,7 +148,7 @@ Rebuild一下项目，顺利的话**(不顺利,这里会报一个错（Error:Cau
 
     gradlew install
 
- 上传到Bintray
+**上传到Bintray**
 
 上传到Bintray需要gradle-bintray-plugin的支持，所以在最外层的build.gradle里添加构建依赖：
 
@@ -157,8 +158,8 @@ Rebuild一下项目，顺利的话**(不顺利,这里会报一个错（Error:Cau
 	    }
 	    dependencies {
 	        classpath 'com.android.tools.build:gradle:1.0.0'
-	        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
-	        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
+          classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+          classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
 	    }
 	}
 	allprojects {
