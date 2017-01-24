@@ -18,7 +18,7 @@ tags:
 
 从具体作用上来说：
 
-服务器端接口：实际上是Binder类的对象，该对象一旦创建，内部则会启动一个隐藏线程，会接收Binder驱动发送的消息，收到消息后，会执行Binder对象中的onTransact()函数，并按照该函数的参数执行不同的服务器端代码。
+服务器端接口：实际上是 Binder 类的对象，该对象一旦创建，内部则会启动一个隐藏线程，会接收Binder驱动发送的消息，收到消息后，会执行 Binder 对象中的 onTransact()函数，并按照该函数的参数执行不同的服务器端代码。
 
 Binder驱动：该对象也为Binder类的实例，客户端通过该对象访问远程服务。
 
@@ -51,6 +51,19 @@ Binder驱动：该对象也为Binder类的实例，客户端通过该对象访�
 	            mCalcAidl = ICalcAIDL.Stub.asInterface(service);
 	        }
 	    };
+
+再看到如下 AIDL 中的代码：
+
+		public static com.roger.aidl.mInterface asInterface(android.os.IBinder obj) {
+			if ((obj == null)) {
+				return null;
+			}
+			android.os.IInterface iin = obj.queryLocalInterface(DESCRIPTOR);
+			if (((iin != null) && (iin instanceof com.roger.aidl.mInterface))) {
+				return ((com.roger.aidl.mInterface) iin);
+			}
+			return new com.roger.aidl.mInterface.Stub.Proxy(obj);
+		}
 
 这里的obj是一个BinderProxy对象，它的queryLocalInterface返回null，于是调用下面语句获得服务端的的远程接口：
 
