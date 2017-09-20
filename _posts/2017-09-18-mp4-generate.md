@@ -24,7 +24,7 @@ Android 中 Mp4 文件的生成主要是通过 Mediacodec 将摄像头采集到�
         }
     }
 
-关于从摄像头采集到转换生成 h264 的过程可以文章末尾的示例 Demo。
+关于从摄像头采集到转换生成 h264 的过程可以参考文章末尾的示例 Demo。
 
 通过 MediaMuxer 可以将 h264 文件流实时生成 mp4 文件，但是如果中途中断程序，是无法继续生成的，只能从头再来，现在我们需要的就是一种能够在中断后，能够保存临时文件，再次打开程序能够继续添加流并成功生成 Mp4 的技术方案。
 
@@ -39,12 +39,12 @@ Android 中 Mp4 文件的生成主要是通过 Mediacodec 将摄像头采集到�
 
 ### Jcodec
 
-[link](https://github.com/jcodec/jcodec)
+[https://github.com/jcodec/jcodec](https://github.com/jcodec/jcodec)
 
 Jcodec 是一个纯 Java 实现的编码器，功能很强大，可以将一组图片生成 Mp4 文件，但由于是纯 Java 的实现，所以在编解码的效率上十分的低下，而我们关注的不是效率，而是纯 Java 的实现我们是可以将其中间数据取出保存的，这样就完美的实现了我们的需求。
 
 接下来我们要做的就是将 Jcodec 的编码器换成使用 MediaCodec 来编码，再通过 Jcodec 的 Muxer 将 h264 的流写入 mp4 文件中，每写一帧即可将中间数据保存下来，在重启后将存储的中间数据恢复，即可进行下一步操作。
 
-源码可见 [link](https://github.com/Rogero0o/Mp4MuxerDemo/tree/master)。
+源码可见 [https://github.com/Rogero0o/Mp4MuxerDemo/tree/master](https://github.com/Rogero0o/Mp4MuxerDemo/tree/master)。
 
 有任何疑问或是建议，请直接通过邮箱联系我，欢迎来扰 ：）
