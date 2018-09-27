@@ -34,10 +34,11 @@ Android Accessibility 的少许开发经验
 
 ### 一些问题以及解决方法
 
+
 1. ListView 在计算 count 的时候会将 header 和 footer 都计算在内，如果有上下拉刷新这种不可见的 header 和 footer 的话问题就更大了，读出的数量往往和可见的正确数量相差特别大，这时候需要对 listview 的 AccessibilityNodeInfo 做一些初始化的修改。在谷歌原生的手机上，当进入 listview 的时候系统会默认读一个 “in list， %s items” 这里边的 %s 也是当前 listview 的总数，这个总数也很有可能是错误的，处理这些错误的方法如下：
 
 
-	mListView.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+	   mListView.setAccessibilityDelegate(new View.AccessibilityDelegate() {
 
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -67,14 +68,15 @@ Android Accessibility 的少许开发经验
 
 通过重写 onInitializeAccessibilityEvent 这个方法可以避免在划入 listview 的时候谷歌的系统读出 “in list %s items”，这样也避免了 items 总数的不对。
 
+
+
 2. 当使用一些系统的 Dialog 的时候，一打开 Dialog 的时候可能会默认读一遍 Dialog 的 Title 内容，然后自动聚焦到 Ttile 的时候又读了一遍，造成了重复的问题，在 Dialog 中复写一下方法能避免该问题：
 
-	
-	@Override
+
+	  @Override
     public boolean dispatchPopulateAccessibilityEvent(@NonNull AccessibilityEvent event) {
         if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
             return true;
         }
         return super.dispatchPopulateAccessibilityEvent(event);
     }
-
