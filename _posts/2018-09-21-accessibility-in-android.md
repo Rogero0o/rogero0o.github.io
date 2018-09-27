@@ -73,10 +73,10 @@ Android Accessibility 的少许开发经验
 2. 当使用一些系统的 Dialog 的时候，一打开 Dialog 的时候可能会默认读一遍 Dialog 的 Title 内容，然后自动聚焦到 Ttile 的时候又读了一遍，造成了重复的问题，在 Dialog 中复写一下方法能避免该问题：
 
 
-	  @Override
-    public boolean dispatchPopulateAccessibilityEvent(@NonNull AccessibilityEvent event) {
-        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
-            return true;
+    	  @Override
+        public boolean dispatchPopulateAccessibilityEvent(@NonNull AccessibilityEvent event) {
+            if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+                return true;
+            }
+            return super.dispatchPopulateAccessibilityEvent(event);
         }
-        return super.dispatchPopulateAccessibilityEvent(event);
-    }
