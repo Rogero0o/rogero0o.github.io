@@ -17,20 +17,64 @@ Android Accessibility 的少许开发经验
 
 当我们的应用发展壮大走向国际的时候，法律条文规定必须支持 Accessibility, 早期的话还能利用 Accessibility 弄一些黑科技（自动抢红包之类的）, 本文只是介绍一些支持 Accessibility 的少许开发经验，并未深入 ：）
 
-### System and Devices
+### System and Devices Different
 
-关于 Accessibility 我接触过的会有两个系统版本区别，一个是 三星系统的 Voice Assistant , 再一个是 Google 原生的 Talkback 服务，大体一致，但是在开发时发现两个系统有一些行为上差别还是很大的，具体如下：
+关于 Accessibility 我接触过的会有两个系统版本区别，一个是 三星系统的 Voice Assistant , 再一个是 Google 原生的 Talkback 服务，大体一致，但是在开发时发现两个系统有一些行为上差别还是很大的，三星也可以选择使用 Google 的 Talkback，两者的差别具体如下：
+
+    a. 三星中 Viewpage 页面中右滑，会定位到不可见的上下页面的元素，可通过监听滑动，然后设置对 Accessibility 是否可见解决。
+
+    b. 三星中定位到 Webview 会读出网页中的内容，而 Talkback 只会读网页的 Title 加上 “webview”，这个需要根据需求适配。
+
+    c. 三星中打开新页面不会自动定位到新页面的第一个元素，相比之下 Talkback 是会的，并且双击屏幕还能出发前页面的点击效果，这点三星也是挺坑的。
+
+    d. Listview 滑动停止时三星会有一个 showing item %s of %s, Talkback 不会，这个需要根据需求自己修改。
+
+    e. 从外部进入 listview 的时候 Talkback 会在末尾加一个 “in list” ，三星的不会。
 
 
+### 一些问题以及解决方法
 
-### Jcodec
+1. ListView 在计算 count 的时候会将 header 和 footer 都计算在内，如果有上下拉刷新这种不可见的 header 和 footer 的话问题就更大了，读出的数量往往和可见的正确数量相差特别大，这时候需要对 listview 的 AccessibilityNodeInfo 做一些初始化的修改。在谷歌原生的手机上，当进入 listview 的时候系统会默认读一个 “in list， %s items” 这里边的 %s 也是当前 listview 的总数，这个总数也很有可能是错误的，处理这些错误的方法如下：
 
-[https://github.com/jcodec/jcodec](https://github.com/jcodec/jcodec)
 
-Jcodec 是一个纯 Java 实现的编码器，功能很强大，可以将一组图片生成 Mp4 文件，但由于是纯 Java 的实现，所以在编解码的效率上十分的低下，而我们关注的不是效率，而是纯 Java 的实现我们是可以将其中间数据取出保存的，这样就完美的实现了我们的需求。
+	mListView.setAccessibilityDelegate(new View.AccessibilityDelegate() {
 
-接下来我们要做的就是将 Jcodec 的编码器换成使用 MediaCodec 来编码，再通过 Jcodec 的 Muxer 将 h264 的流写入 mp4 文件中，每写一帧即可将中间数据保存下来，在重启后将存储的中间数据恢复，即可进行下一步操作。
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+                super.onInitializeAccessibilityNodeInfo(host, info);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    AccessibilityNodeInfo.CollectionInfo old = info.getCollectionInfo();
+                    info.setCollectionInfo(AccessibilityNodeInfo.CollectionInfo.obtain(
+                            old.getRowCount() - mListView.getHeaderViewsCount()
+                                    - mListView.getFooterViewsCount(),
+                            old.getColumnCount(),
+                            old.isHierarchical(),
+                            old.getSelectionMode()));
+                }
+            }
 
-源码可见 [https://github.com/Rogero0o/Mp4MuxerDemo/tree/master](https://github.com/Rogero0o/Mp4MuxerDemo/tree/master)。
+            @Override
+            public void onInitializeAccessibilityEvent(View host, AccessibilityEvent event) {
+                super.onInitializeAccessibilityEvent(host, event);
+                event.setFromIndex(-1);
+                event.setToIndex(-1);
+                event.setItemCount(-1);
+            }
+        });
 
-有任何疑问或是建议，请直接通过邮箱联系我，欢迎来扰 ：）
+我们通过重写 onInitializeAccessibilityNodeInfo 方法来控制 info 的 CollectionInfo 中的数量，减去 headerView 和 footerView 的数量后，这样三星上读出来的数量就正常了。
+
+通过重写 onInitializeAccessibilityEvent 这个方法可以避免在划入 listview 的时候谷歌的系统读出 “in list %s items”，这样也避免了 items 总数的不对。
+
+2. 当使用一些系统的 Dialog 的时候，一打开 Dialog 的时候可能会默认读一遍 Dialog 的 Title 内容，然后自动聚焦到 Ttile 的时候又读了一遍，造成了重复的问题，在 Dialog 中复写一下方法能避免该问题：
+
+	
+	@Override
+    public boolean dispatchPopulateAccessibilityEvent(@NonNull AccessibilityEvent event) {
+        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            return true;
+        }
+        return super.dispatchPopulateAccessibilityEvent(event);
+    }
+
