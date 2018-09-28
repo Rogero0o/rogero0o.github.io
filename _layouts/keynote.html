@@ -182,8 +182,9 @@ layout: default
     resize();
 </script>
 
+<!-- 多说公共JS代码 start (一个网页只需插入一次)
 {% if site.duoshuo_username %}
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+
 <script type="text/javascript">
     // dynamic User by Hux
     var _user = '{{site.duoshuo_username}}';
@@ -199,9 +200,9 @@ layout: default
          || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
 </script>
-<!-- 多说公共JS代码 end -->
-{% endif %}
 
+{% endif %}
+ 多说公共JS代码 end -->
 
 {% if site.disqus_username %}
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
