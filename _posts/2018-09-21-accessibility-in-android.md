@@ -74,7 +74,7 @@ Android Accessibility 的少许开发经验
 
 
 
-      	  @Override
+      	   @Override
           public boolean dispatchPopulateAccessibilityEvent(@NonNull AccessibilityEvent event) {
               if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
                   return true;
