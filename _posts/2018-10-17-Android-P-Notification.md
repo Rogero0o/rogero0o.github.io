@@ -11,8 +11,6 @@ tags:
 Android P Notification 那些你不知道的坑
 ---
 
-### 背景
-
 Android Pie 已经发布许久，相信大家已经做过了 Android P 版本的适配，如果不升级 Target SDK 来说的话，问题不大，基本没有什么工作量。但若是需要升级 Target SDK 到 28 的话，如果是 MESSAGE 的类型的 Notification 是有一些官方文档没提到的坑，是官方文档没有说明的，在这总结一下：
 
 1. 在 Android P 中，*NotificationCompat.Builder.setLargeicon()* 方法设置的不再是对话人物的头像，而是这个 Notification 在缩小状态下才会显示出来的属于这个 Notification 的头像。对话人物的头像现在统一由 Person 类来设置。
