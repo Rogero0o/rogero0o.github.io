@@ -23,6 +23,10 @@ Android Pie 已经发布许久，相信大家已经做过了 Android P 版本的
 
 5. 为了解决第四点中提到的问题，我们都会持有 builder 的对象，但是如果在收到 notification 的时候用户将应用手动 kill 掉，那么我们持有的 builder 又被销毁，这时在更新时正确的做法是获取 notification 的实例，然后通过其中的参数再 recreate 一个相同的 builder。
 
+6. 请注意，再次生成或从 cache 获取的 builder 是需要再次设置 contentIntent 的，不然会造成无法跳转。
+
+7. 如果需要从 notificaiton 回复的时候不需要声音，那么在设置 notificaitonChannel 的时候需要调用 channel.setSound(null,null) , 从 notificaiton 或是 builder 里边设置是没有效果的。
+
 
 源码可见 [https://github.com/Rogero0o/AndroidP_Notification_Demo](https://github.com/Rogero0o/AndroidP_Notification_Demo)。
 
