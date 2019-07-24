@@ -33,15 +33,15 @@ Android Q Impact
 
 [https://developer.android.com/preview/privacy/scoped-storage](https://developer.android.com/preview/privacy/scoped-storage)
 
-简单来说，如果将 targetsdkversion 改为 29 的话，系统将不允许应用访问外部存储的问题，例如相机拍摄的文件以及 Download 文件夹，需要使用 MediaStore 的 openFile 来获取文件流，否则直接报 Filenotfound error。 'MediaStore.MediaColumns.DATA' 这个字段也被标识过期，因为无法直接使用 file path 这种方式打开文件。
+简单来说，如果将 targetsdkversion 改为 29 的话，系统将不允许应用访问外部存储的问题，例如相机拍摄的文件以及 Download 文件夹，需要使用 MediaStore 的 openFile 来获取文件流，否则直接报 Filenotfound error。 `MediaStore.MediaColumns.DATA` 这个字段也被标识过期，因为无法直接使用 file path 这种方式打开文件。
 
-这个改动的影响是非常大的，凡是涉及到文件拷贝，图库以及相机等功能的代码都可能被影响，所以 Android Q 提供了一个过渡方案，在 manifest 中设置 ‘android:requestLegacyExternalStorage="true"’ 来屏蔽 Scoped Storage 生效， but 明年应该就不行了，所以早做早好吧.
+这个改动的影响是非常大的，凡是涉及到文件拷贝，图库以及相机等功能的代码都可能被影响，所以 Android Q 提供了一个过渡方案，在 manifest 中设置 `android:requestLegacyExternalStorage="true"` 来屏蔽 Scoped Storage 生效， but 明年应该就不行了，所以早做早好吧.
 
 #### Restrictions to background activity starts
 
 [https://developer.android.com/preview/privacy/background-activity-starts](https://developer.android.com/preview/privacy/background-activity-starts)
 
-出于不希望应用直接打断用户当前操作的目的，Android Q 开始严格限制应用从后台启动前台 Activity，对于需要显示 Incoming Call 或是闹铃提醒的应用，Android 推荐使用 FullScreen Intent 来启动一个 HeadsUp Notification，注意在 Android Q 上需要新申请一个 USE_FULL_SCREEN_INTENT 的 permission.
+出于不希望应用直接打断用户当前操作的目的，Android Q 开始严格限制应用从后台启动前台 Activity，对于需要显示 Incoming Call 或是闹铃提醒的应用，Android 推荐使用 FullScreen Intent 来启动一个 HeadsUp Notification，注意在 Android Q 上需要新申请一个 `USE_FULL_SCREEN_INTENT` 的 permission.
 
 #### Updates to non-SDK interface restrictions
 
@@ -56,7 +56,7 @@ Android Q Impact
 
 [https://developer.android.com/preview/features/gesturalnav](https://developer.android.com/preview/features/gesturalnav)
 
-现在 Android Q 系统提供新的手势滑动功能，新增 edge-to-edge 的手势滑动来代替 back 键，但是这个在左滑退出时会和 Drawer 划出菜单栏冲突，变成无法滑动划出 Drawer，系统提供 'setSystemGestureExclusionRects(exclusionRects)' 方法来屏蔽特定区域的手势滑动，需要自己自定义适配，系统在 Beta 5 的时候也提供了在左边缘长按划出 Drawer 的功能，可以根据需要进行修改。
+现在 Android Q 系统提供新的手势滑动功能，新增 edge-to-edge 的手势滑动来代替 back 键，但是这个在左滑退出时会和 Drawer 划出菜单栏冲突，变成无法滑动划出 Drawer，系统提供 `setSystemGestureExclusionRects(exclusionRects)` 方法来屏蔽特定区域的手势滑动，需要自己自定义适配，系统在 Beta 5 的时候也提供了在左边缘长按划出 Drawer 的功能，可以根据需要进行修改。
 
 #### Dark Theme
 
