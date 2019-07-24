@@ -1,68 +1,84 @@
 ---
 layout:     post
-title:      "Goodbye 2018 , Hello 2019"
-subtitle:   "Keep Going Roger"
-date: 2019-01-07 11:00:01 +0800
+title:      "Android Q Impact"
+subtitle:   "What's new in Android Q"
+date: 2019-07-24 11:00:01 +0800
 author:     "Roger"
 header-img: "img/home-bg-o.jpg"
 tags:
-    - Life
+    - Android Framework
 ---
-认清自己，放过自己
+Android Q Impact
 ---
 
-    以前总觉得仗剑走天涯好帅，后来发现那只是虚荣心在作祟
-    无法认清自身的能力、段位和资源，只靠一身热血和盲目的自信，现在看来竟是如此的幼稚
+一年一度的 Android 系统又更新啦，今年来到了 Android Q，个人感觉现在 Android 的发展是对应用的限制越来越严格，新的亮眼的功能基本是没有了，略显失望！
 
-如果说 18 年我最大的收获是什么，我想应该是学会了认清自己.
+### Agenda
 
-不再追求那些想当然拍脑袋的目标，学着从实际情况出发，为自己设置好定位，是自己能够得着的定位.
+1. Scoped Storage
+2. Restrictions to background activity starts
+3. Updates to non-SDK interface restrictions
+4. Guestral Navigation
+5. Dark Theme
+6. Sharing improvements
+7. Bubbles
+8. Smart Reply
 
-完全不需要活在别人的眼中，从来没有所谓的一定和必须，生死之外无大事，除了亲人的离去和物理上的病痛，其他的痛苦都是价值观带来的对自身无能的痛恨和无助.
 
-都是成年人了，要学会选择自己的生活，选择什么，放弃什么，什么合适，什么不必挂心，心里应该要有点数.
+前三点是新系统新增的对权限和隐私的限制，后面六点为新增的功能，下面将分别讲解。
 
-### 大事记
+### 权限及隐私
 
-18 年三月份在家买了房，很仓促，上午看了房，下午就付了定金，第二天就办好了贷款。
-只是稀疏平常的一天，对我人生的影响可能就是无法估计的，没有什么别的想法，只是觉得该买了，就买。
+####  Scoped Storage
 
-八月份，恋爱了，终于摆脱了将近三十年的母胎单身，实在是不容易，感谢亲爱的。
+https://developer.android.com/preview/privacy/scoped-storage
 
-元旦，老妹结婚，把妹子带回家，一通忙，老爸的发言着实优秀，如此冷血的我都被感动得泪目。
+简单来说，如果将 targetsdkversion 改为 29 的话，系统将不允许应用访问外部存储的问题，例如相机拍摄的文件以及 Download 文件夹，需要使用 MediaStore 的 openFile 来获取文件流，否则直接报 Filenotfound error。 'MediaStore.MediaColumns.DATA' 这个字段也被标识过期，因为无法直接使用 file path 这种方式打开文件。
 
-### 旅游
+这个改动的影响是非常大的，凡是涉及到文件拷贝，图库以及相机等功能的代码都可能被影响，所以 Android Q 提供了一个过渡方案，在 manifest 中设置 ‘android:requestLegacyExternalStorage="true"’ 来屏蔽 Scoped Storage 生效， but 明年应该就不行了，所以早做早好吧.
 
-七月中去阳江跳伞，虽然天气很差，但也是完成了一个心愿吧。
+#### Restrictions to background activity starts
 
-七月底跟着部门出游去了桂林，坐了坐小木筏感觉还不错。
+https://developer.android.com/preview/privacy/background-activity-starts
 
-十一月公司出游去了三清山，爬了整整一天膝盖都废了。
+出于不希望应用直接打断用户当前操作的目的，Android Q 开始严格限制应用从后台启动前台 Activity，对于需要显示 Incoming Call 或是闹铃提醒的应用，Android 推荐使用 FullScreen Intent 来启动一个 HeadsUp Notification，注意在 Android Q 上需要新申请一个 USE_FULL_SCREEN_INTENT 的 permission.
 
-元旦跟亲爱的去了重庆跟成都，熊猫真可爱，火锅真好吃。
+#### Updates to non-SDK interface restrictions
 
-### 技术能力
+https://developer.android.com/preview/non-sdk-q
 
-18 年学习了 kotlin，在在项目中完美使用
+这是谷歌从 Android P 就开始限制的功能，不能调用非 Sdk 提供的接口，使用类似反射调用的方法将直接报错，这对维护系统稳定是很有帮助的。
 
-在架构能力上有了一定的提高，还是需要多多练习
 
-18 年博客没有持续更新，很惭愧， 19 年一定要加油，好好写博客！
+### 新功能
 
-### 总结
+#### Guestral Navigation
 
-18年完成了人生的两件大事，我给自己打 80分！平时偶尔偷懒堕落不努力扣十分，没有按计划学习提升扣十分。
+https://developer.android.com/preview/features/gesturalnav
 
-19年，先定几个小目标：
+现在 Android Q 系统提供新的手势滑动功能，新增 edge-to-edge 的手势滑动来代替 back 键，但是这个在左滑退出时会和 Drawer 划出菜单栏冲突，变成无法滑动划出 Drawer，系统提供 'setSystemGestureExclusionRects(exclusionRects)' 方法来屏蔽特定区域的手势滑动，需要自己自定义适配，系统在 Beta 5 的时候也提供了在左边缘长按划出 Drawer 的功能，可以根据需要进行修改。
 
-    1.跟着妹子回贵州一次
+#### Dark Theme
 
-    2.跟妹子出国旅游一次
+https://developer.android.com/preview/features/darktheme
 
-    3.工作再接再厉，希望能有一次突出的表现
+Android Q 系统提供了 Dark Theme，如果你的颜色值等是完全是使用系统的，则直接使用系统提供的 Dark theme 则能直接适配黑暗模式，but 一般应用都应该有自定义的颜色和图片，所以适配 Dark Theme 还是很有工作量的。
 
-    4.希望在技术上能有所提升，选好一个技术方向好好深耕，并提升技术宽度
 
-没有目标的人生就像迷失在大海上的船，所有的风向都是逆风。
+#### Sharing improvements
 
-谢谢你，还能看到这里，少年，新年一起加油吧！
+https://developer.android.com/preview/features/sharing
+
+Android 系统的分享页面已经更新了，支持直接分享给指定联系人和 Sharing 内容的预览。应用层不需要做任何改动。
+
+#### Bubbles
+
+https://developer.android.com/preview/features/bubbles
+
+Bubbles 是 notification 的一个延伸，支持用户直接打开图标上的小红点并进行交互。然而， “Note: Bubbles are currently enabled for all users in the Q developer previews. In the final release, Bubbles will be available for developer use only.” 所以感觉还是在开发期的一个功能。
+
+#### Smart Reply
+
+https://developer.android.com/preview/features 页面末尾
+
+Smart Reply 是 Android P 上就支持的一个功能，但是在 P 系统上无法自动生成 reply 的建议，在 Android Q 系统上通过一个系统内置的可离线使用的大数据分析系统（我猜的）来实现自动生成 suggest 的 reply 建议，如果你的 notification 已经适配过 P （既能在 Notificaiton 上一直的 reply），那么不需要做任何改动，在 Android Q 上就能自动生成 Smart Reply 的 button。
