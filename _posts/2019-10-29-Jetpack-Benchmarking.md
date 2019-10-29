@@ -29,30 +29,30 @@ Google I/O 2019 Jetpack Benchmarking
 
 以上就是一些高效率代码的建议，但是如何才能客观的对比代码优化前后的效率呢？有没有什么现成的方法呢？有没有一种可以测量一大段代码耗时时间的工具呢？答案是肯定的，那就是 Benchmarking. 在介绍 Benchmanking 之前，让我们先看看之前是如何测量代码的效率的。
 
-            @Test
-            fun codeMeasurement() {
-                val worker = TestListenableWorkerBuilder<MyWorker>(context).build() //jetpack workmanager library
-                val start = java.lang.System.nanoTime() //for starting time of work
-                worker.doWork() //do some work i.e. code to be measured
-                val elapsed = (java.lang.System.nanoTime() - start) //time taken to complete the work
-                Log.d("Code Measurement", "Time taken was $elapsed ns")
-            }
+        @Test
+        fun codeMeasurement() {
+            val worker = TestListenableWorkerBuilder<MyWorker>(context).build() //jetpack workmanager library
+            val start = java.lang.System.nanoTime() //for starting time of work
+            worker.doWork() //do some work i.e. code to be measured
+            val elapsed = (java.lang.System.nanoTime() - start) //time taken to complete the work
+            Log.d("Code Measurement", "Time taken was $elapsed ns")
+        }
 
 
 在这里，我们计算代码运行时间的方法是结束时间减去开始时间，但是问题在于，因为硬件和软件的问题，每次运行得出的结果都是不一样的，为了避免这个影响，我们会测量多次，从而获得代码运行的平均时间。
 
-            @Test
-            fun codeMeasurement() {
-                val worker = TestListenableWorkerBuilder<MyWorker>(context).build() //jetpack workmanager library
-                val COUNT = 5 //some iteration count
-                val start = java.lang.System.nanoTime() //for starting time of work
-                for (i in 0..COUNT) {
-                    worker.doWork() //do some work i.e. code to be measured
-                }
-                // include outliers
-                val elapsed = (java.lang.System.nanoTime() - start) / COUNT //average time taken to complete the work
-                Log.d("Code Measurement", "Time taken was $elapsed ns")
+        @Test
+        fun codeMeasurement() {
+            val worker = TestListenableWorkerBuilder<MyWorker>(context).build() //jetpack workmanager library
+            val COUNT = 5 //some iteration count
+            val start = java.lang.System.nanoTime() //for starting time of work
+            for (i in 0..COUNT) {
+                worker.doWork() //do some work i.e. code to be measured
             }
+            // include outliers
+            val elapsed = (java.lang.System.nanoTime() - start) / COUNT //average time taken to complete the work
+            Log.d("Code Measurement", "Time taken was $elapsed ns")
+        }
 
 
 以上代码，我们使 COUNT 等于 5 次来计算 5 次运行后的平均时间，但是为什么是 5 次？为什么不能是别的次数呢？同样，这样的计算也会有超出平均值的快慢，或是被任何运行在后台的程序所影响。
