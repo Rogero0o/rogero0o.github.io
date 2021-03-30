@@ -80,7 +80,9 @@ Android Studio 会自动生成一个 Cpp 文件夹并包含 CMakeLists.txt 和 n
 可以看到 swig 自动生成了 *cpp/swigtest_wrap.cpp* 文件，在 *src/main/java/com/mycompany/swigtest* 下生成了 
 
 *swigtest.java* （用来调用 JNI 的类，通过实例化这个类来调用 JNI 方法 
+
 *Test.java*（空实现， swig 生成的 java 文件由上层实现的部分 
+
 *TestJNI.java* （实际的 JNI 类，调用到 C++ 方法
 
 接下来修改 CMakeLists.txt 文件
@@ -108,6 +110,8 @@ Android Studio 会自动生成一个 Cpp 文件夹并包含 CMakeLists.txt 和 n
 	                       ${log-lib} )
 
 注意 add_library 中需要添加 *swigtest.cpp* *swigtest_wrap.cpp* 并且需要按顺序，不然会报错找不到这个 swigtest 的 C++ 类。
+
+接下来就可以在 *MainActivity* 中直接生成一个 *swigtest* 对象，调用 *GetNumber()* 获得一个 666 拉老铁们。
 
 整个工程的下载路径 [https://github.com/Rogero0o/swigtest](https://github.com/Rogero0o/swigtest)
 
